@@ -1,0 +1,25 @@
+Django ~= 4.1
+djangorestframework
+gunicorn
+
+## database
+psycopg2
+
+python-decouple
+
+## S3 support
+boto
+boto3
+
+## Static files
+whitenoise
+
+## Debug Toolbar
+django-debug-toolbar
+
+## Field encryption
+django-cryptography
+
+httpx
+
+pydantic
