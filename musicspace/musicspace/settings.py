@@ -147,3 +147,11 @@ EMAIL_FILE_PATH = '/tmp/emails'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/musicspace/static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Django Debug Toolbar
+def show_toolbar(request):
+    return DEBUG and config('DEBUG_TOOLBAR_ENABLED', cast=bool, default=False)
+    
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+}

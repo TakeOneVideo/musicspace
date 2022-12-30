@@ -1,0 +1,36 @@
+{% extends 'musicspace_app/base.html' %}
+
+{% load static %}
+
+{% block extra_head %}
+{% if title %}
+<title>{{ title }}</title>
+{% else %}
+<title>Musicspace</title>
+{% endif %}
+{% endblock %}
+
+{% block nav %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary musicspace-navbar">
+    <div class="container-fluid justify-content-start">
+        <a class="navbar-brand" href="{% url 'musicspace:index' %}">
+            <img src="{% static 'img/musicspace_logo.png' %}" alt="Logo" width="60" height="60" class="d-inline-block align-text-center">
+            <span class="musicspace-navbar-title">Musicspace</span>
+        </a>
+        <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link musicspace-navbar-item" href="{% url 'musicspace:find-a-teacher' %}">Find a Teacher</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link musicspace-navbar-item" href="{% url 'musicspace:for-teachers' %}">For Teachers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link musicspace-navbar-item" href="{% url 'musicspace:about-us' %}">About Us</a>
+            </li>
+        </ul>
+        <div></div>
+    </div>
+</nav>
+
+{% endblock %}

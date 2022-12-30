@@ -1,0 +1,15 @@
+.musicspace-navbar {
+    background-color: #FBF8FF !important;
+}
+
+.musicspace-navbar-title {
+    color: #8C2D99 !important;
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.musicspace-navbar-item {
+    color: #DF3DB6 !important;
+    font-size: 24px;
+    font-weight: 500;
+}
