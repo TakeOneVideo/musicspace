@@ -23,7 +23,7 @@ services:
       - dev.musicspace-service.env
     volumes:
       - ./musicspace:/src
-      - ./data/musicspace-service-emails:/tmp/emails
+      - ./data/musicspace-service/emails:/tmp/emails
       - ./data/musicspace-service:/var/musicspace
     depends_on:
       # - musicspace-service-db
