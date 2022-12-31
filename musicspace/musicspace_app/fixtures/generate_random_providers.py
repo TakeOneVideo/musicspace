@@ -3,28 +3,56 @@ import sys
 import uuid
 import random
 from datetime import datetime
+import lorem
 ## This is needed in order to reference the imports from the level above
 sys.path.append(os.path.realpath('../..'))
 
-output_file = '/src/musicspace_app/fixtures/teachers.json'
+output_file = '/src/musicspace_app/fixtures/providers.json'
 
 from musicspace_app.models import (
-    Teacher, TeacherFile, 
+    Provider, ProviderFile, 
     Name, Address, Gender
 )
 
 male_given_names = [
-    'James'
+    'James',
+    'Robert',
+    'John',
+    'Michael',
+    'David',
+    'William',
+    'Richard',
+    'Joseph',
+    'Thomas',
+    'Charles'
 ]
 female_given_names = [
-    'Sara'
+    'Mary',
+    'Patricia',
+    'Jennifer',
+    'Linda',
+    'Elizabeth',
+    'Barbara',
+    'Susan',
+    'Jessica',
+    'Sara',
+    'Karen'
 ]
 family_names = [
-    'Kizer'
+    'Smith',
+    'Johnson',
+    'Williams',
+    'Brown',
+    'Jones',
+    'Garcia',
+    'Miller',
+    'Davis',
+    'Rodriguez',
+    'Martinez'
 ]
 
 titles = [
-    'NAFME Certified Music Instructor'
+    'NAFME Certified Music Provider'
 ]
 
 male_image_urls = [
@@ -101,7 +129,11 @@ def generate_random_created_date_time() -> datetime:
     timestamp = random.uniform(starting_timestamp, ending_timestamp)
     return datetime.utcfromtimestamp(timestamp)
 
-def generate_random_teacher() -> Teacher:
+def generate_random_text() -> str:
+    return lorem.get_paragraph()
+
+
+def generate_random_provider() -> Provider:
     tid = uuid.uuid4()
     gender = generate_random_gender()
     # print(gender)
@@ -115,21 +147,25 @@ def generate_random_teacher() -> Teacher:
     # print(image_url)
     created_date_time = generate_random_created_date_time()
 
-    return Teacher(
+    text = generate_random_text()
+
+    return Provider(
         id=tid,
         name=name,
         gender=gender,
         title=title,
         location=location,
+        text=text,
         image_url=image_url,
         created_date_time=created_date_time
     )
 
-teachers = [generate_random_teacher() for i in range(10)]
+providers = [generate_random_provider() for i in range(20)]
+providers = sorted(providers, key=lambda provider: provider.created_date_time)
 
-teacher_file = TeacherFile(
-    teachers=teachers
+provider_file = ProviderFile(
+    providers=providers
 )
 
 with open(output_file, 'w') as output_file:
-    output_file.write(teacher_file.json(exclude_none=True, indent=4))
+    output_file.write(provider_file.json(exclude_none=True, indent=4))

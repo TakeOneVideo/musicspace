@@ -41,15 +41,23 @@ class Gender(str, Enum):
     OTHER = 'other'
 
 # Create your models here.
-class Teacher(BaseModel):
+class Provider(BaseModel):
     id: UUID
     name: Name
     gender: Gender
     title: str
     location: Address
+    text: str
     image_url: str
     created_date_time: datetime
 
-class TeacherFile(BaseModel):
-    teachers: List[Teacher]
+    @property
+    def truncated_text(self) -> str:
+        if len(self.text) > 100:
+            return self.text[:100] + '...' 
+        else:
+            return self.text
+
+class ProviderFile(BaseModel):
+    providers: List[Provider]
     

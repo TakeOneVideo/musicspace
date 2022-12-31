@@ -18,17 +18,56 @@ body {
     font-weight: 500;
 }
 
-.instructor-list-layout {
+.provider-list-layout {
     display:grid;
     gap:1.5rem;
     grid-template-areas:"sidebar main";
     grid-template-columns:1fr 3fr
 }
 
-.instructor-list-sidebar {
+.provider-list-sidebar {
     grid-area:sidebar;
 }
 
-.instructor-list-main {
+.provider-list-main {
     grid-area:main;
+}
+
+.provider-list-item-row {
+    background-color: #FBF8FF !important;
+}
+
+.provider-list-item-card {
+    margin-bottom: 8px;
+    text-decoration: inherit; /* no underline */
+}
+
+.provider-list-item-image {
+    /* height: 288px; */
+    object-fit: cover;
+    border-radius: 4px;
+    height: 200px;
+    width: 200px;
+}
+
+.provider-list-item-image-placeholder {
+    width: 512px;
+    /* border: 0.5px solid; */
+    /* border-color: black; */
+    background-color: lightgray;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    color: blue;
+    overflow: hidden;
+}
+
+.provider-list-item-button {
+    background-color: #DF3DB6 !important;
+    color: #FBF8FF !important;
+    border-color: #8C2D99 !important;
+}
+
+.provider-list-item-text {
+    margin: 0px;
 }

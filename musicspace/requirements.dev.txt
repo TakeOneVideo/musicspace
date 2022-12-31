@@ -23,3 +23,5 @@ django-cryptography
 httpx
 
 pydantic
+
+python-lorem
