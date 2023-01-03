@@ -1,33 +1,43 @@
 from django.db import models
-from pydantic import BaseModel
-from typing import Optional, List
-from uuid import UUID
-from datetime import datetime
-from enum import Enum
+from django.utils.translation import gettext_lazy as _
+from typing import Optional, Any
+import uuid
 
-class Genre(str, Enum):
-    CLASSICAL = 'Classical'
-    JAZZ = 'Jazz'
-    POP = 'Pop'
-    ROCK = 'Rock'
-    R_AND_B = 'Rhythm and Blues'
-    COUNTRY = 'Country'
+from django.contrib.auth.models import AbstractUser
 
-class Instrument(str, Enum):
-    VOICE = 'Voice'
-    GUITAR = 'Guitar'
-    BASS = 'Bass'
-    DRUMS = 'Drums'
-    CELLO = 'Cello'
-    TRUMPET = 'Trumpet'
-    SAXOPHONE = 'Saxophone'
+class MusicspaceUser(AbstractUser):
 
-class Address(BaseModel):
-    street_1: str
-    street_2: Optional[str]
-    city: str
-    state: str
-    zip: str
+    def __str__(self):
+        return self.username
+
+    @property
+    def provider(self) -> Optional[Any]:
+        try:
+            return self.provider_opt
+        except:
+            return None
+
+class Address(models.Model):
+    street_1 = models.CharField(
+        max_length=128
+    )
+
+    street_2 = models.CharField(
+        max_length=128,
+        blank=True
+    )
+
+    city = models.CharField(
+        max_length=128
+    )
+
+    state = models.CharField(
+        max_length=64
+    )
+
+    zip = models.CharField(
+        max_length=16
+    )
 
     @property
     def short(self) -> str:
@@ -43,34 +53,80 @@ class Address(BaseModel):
 
         return '\n'.join(lines)
 
-class Name(BaseModel):
-    given_name: str
-    family_name: str
+class Genre(models.Model):
+    id = models.CharField(
+        max_length=32,
+        primary_key=True
+    )
+
+    display_text = models.CharField(
+        max_length=64
+    )
+
+class Instrument(models.Model):
+    id = models.CharField(
+        max_length=32,
+        primary_key=True
+    )
+
+    display_text = models.CharField(
+        max_length=64
+    )
+
+class Provider(models.Model):
+
+    class Gender(models.TextChoices):
+        MALE = 'male', _('Male')
+        FEMALE = 'female', _('Female')
+        NONBINARY = 'nonbinary', _('Nonbinary')
+        OTHER = 'other', _('Other')
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.OneToOneField(
+        MusicspaceUser, 
+        related_name='provider_opt',
+        on_delete=models.PROTECT
+    )
+
+    title = models.CharField(
+        max_length=256,
+        blank=True,
+        default=''
+    )
+
+    text = models.TextField(
+        blank=True,
+        default=''
+    )
+
+    gender = models.CharField(
+        max_length=16,
+        choices=Gender.choices
+    )
+
+    location = models.OneToOneField(
+        Address, 
+        related_name='provider',
+        on_delete=models.PROTECT
+    )
+
+    image_url = models.CharField(
+        max_length=256,
+        blank=True,
+        default=''
+    )
+
+    genres = models.ManyToManyField(Genre)
+
+    instruments = models.ManyToManyField(Instrument)
+
+    in_person = models.BooleanField()
+    online = models.BooleanField()
 
     @property
     def full_name(self) -> str:
-        return f'{self.given_name} {self.family_name}'
-
-class Gender(str, Enum):
-    MALE = 'male'
-    FEMALE = 'female'
-    NONBINARY = 'nonbinary'
-    OTHER = 'other'
-
-# Create your models here.
-class Provider(BaseModel):
-    id: UUID
-    name: Name
-    gender: Gender
-    title: str
-    location: Address
-    text: str
-    image_url: str
-    genres: List[Genre]
-    instruments: List[Instrument]
-    in_person: bool
-    online: bool
-    created_date_time: datetime
+        return self.user.get_full_name()
 
     @property
     def truncated_text(self) -> str:
@@ -78,7 +134,3 @@ class Provider(BaseModel):
             return self.text[:100] + '...' 
         else:
             return self.text
-
-class ProviderFile(BaseModel):
-    providers: List[Provider]
-    

@@ -155,3 +155,5 @@ def show_toolbar(request):
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
 }
+
+AUTH_USER_MODEL = 'musicspace_app.MusicspaceUser'
