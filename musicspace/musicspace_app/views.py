@@ -4,14 +4,47 @@ from django.views.generic.base import TemplateView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from musicspace_app.models import Provider
+from django.core.paginator import Paginator
 # Create your views here.
-class ProviderListView(TemplateView):
-    template_name = 'musicspace_app/provider_list.html'
+
+DEFAULT_PAGE_SIZE = 10
+class ProviderSearchView(TemplateView):
+    template_name = 'musicspace_app/provider_search.html'
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['providers'] = Provider.objects.all()\
-            .select_related('user', 'location')
+
+        providers = Provider.objects.all()\
+            .select_related('user', 'location')\
+            .order_by('user__date_joined')
+        paginator = Paginator(providers, DEFAULT_PAGE_SIZE)
+
+        page_number = int(self.request.GET.get('page', 1))
+        context['page_of_providers'] = paginator.get_page(page_number)
+        next_page_index = page_number + 1
+        if next_page_index <= paginator.num_pages:
+            context['next_page_index'] = next_page_index
+
+        context['total_provider_count'] = paginator.count
+
+        return context
+
+class ProviderListComponentView(TemplateView):
+    template_name = 'musicspace_app/components/provider_list.html'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        providers = Provider.objects.all()\
+            .select_related('user', 'location')\
+            .order_by('user__date_joined')
+        paginator = Paginator(providers, DEFAULT_PAGE_SIZE)
+        page_number = int(self.request.GET.get('page', 1))
+        page_of_providers = paginator.get_page(page_number)
+        context['page_of_providers'] = page_of_providers
+        next_page_index = page_number + 1
+        if next_page_index <= paginator.num_pages:
+            context['next_page_index'] = next_page_index
+        
         return context
 
 class ProviderDetailView(TemplateView):
@@ -31,5 +64,5 @@ class ForProvidersView(TemplateView):
 class AboutUsView(TemplateView):
     template_name = 'musicspace_app/about_us.html'
 
-class IndexView(ProviderListView):
+class IndexView(ProviderSearchView):
     pass

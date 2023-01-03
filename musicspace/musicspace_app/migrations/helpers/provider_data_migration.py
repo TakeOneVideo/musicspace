@@ -1,13 +1,46 @@
-from .pydantic_models import (
-    Address as PyAddress,
-    Gender as PyGender,
-    Name as PyName
-)
 import random
 from datetime import datetime
 from django.utils import timezone
 import lorem
-from typing import List, Tuple
+from typing import List, Tuple, Optional
+from pydantic import BaseModel
+from enum import Enum
+
+
+class PyAddress(BaseModel):
+    street_1: str
+    street_2: Optional[str]
+    city: str
+    state: str
+    zip: str
+
+    @property
+    def short(self) -> str:
+        return f'{self.city}, {self.state}'
+
+    @property
+    def full(self) -> str:
+        lines = []
+        lines.append(self.street_1)
+        if self.street_2:
+            lines.append(self.street_2)
+        lines.append(f'{self.city}, {self.state} {self.zip}')
+
+        return '\n'.join(lines)
+
+class PyName(BaseModel):
+    given_name: str
+    family_name: str
+
+    @property
+    def full_name(self) -> str:
+        return f'{self.given_name} {self.family_name}'
+
+class PyGender(str, Enum):
+    MALE = 'male'
+    FEMALE = 'female'
+    NONBINARY = 'nonbinary'
+    OTHER = 'other'
 
 NUMBER_OF_PROVIDERS_TO_ADD = 100
 

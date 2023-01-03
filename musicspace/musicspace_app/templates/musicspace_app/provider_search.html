@@ -1,0 +1,17 @@
+{% extends 'musicspace_app/public_base.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="row align-items-start">
+        <div class="col-3">
+            <p>Provider List Sidebar</p>
+        </div>
+        <div id="provider-list" class="col">
+            <div class="row">
+                <p>Found {{ total_provider_count }} Teachers</p>
+            </div>
+            {% include "musicspace_app/components/provider_list.html" with page_of_providers=page_of_providers next_page_index=next_page_index%}
+        </div>
+    </div>
+</div>
+{% endblock %}
