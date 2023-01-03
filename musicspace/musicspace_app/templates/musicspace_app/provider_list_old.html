@@ -1,0 +1,22 @@
+{% extends 'musicspace_app/public_base.html' %}
+
+{% block content %}
+<div class="container-xxl provider-list-layout">
+    <aside class="bd-sidebar provider-list-sidebar">
+        <p>Provider List Sidebar</p>
+    </aside>  
+    <main class="container bd-main provider-list-main">
+        <div class="row">
+            <hr/>
+        </div>
+        {% for provider in providers %}
+        <div class="row p-2">
+            {% include "musicspace_app/components/provider_list_item.html" with provider=provider %}
+        </div>
+        <div class="row">
+            <hr/>
+        </div>
+        {% endfor %}
+    </main>
+</div>
+{% endblock %}

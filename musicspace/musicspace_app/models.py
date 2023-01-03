@@ -6,21 +6,21 @@ from datetime import datetime
 from enum import Enum
 
 class Genre(str, Enum):
-    CLASSICAL = 'classical'
-    JAZZ = 'jazz'
-    POP = 'pop'
-    ROCK = 'rock'
-    R_AND_B = 'r_and_b'
-    COUNTRY = 'country'
+    CLASSICAL = 'Classical'
+    JAZZ = 'Jazz'
+    POP = 'Pop'
+    ROCK = 'Rock'
+    R_AND_B = 'Rhythm and Blues'
+    COUNTRY = 'Country'
 
 class Instrument(str, Enum):
-    VOICE = 'voice'
-    GUITAR = 'guitar'
-    BASS = 'bass'
-    DRUMS = 'drums'
-    CELLO = 'cello'
-    TRUMPET = 'trumpet'
-    SAXOPHONE = 'saxophone'
+    VOICE = 'Voice'
+    GUITAR = 'Guitar'
+    BASS = 'Bass'
+    DRUMS = 'Drums'
+    CELLO = 'Cello'
+    TRUMPET = 'Trumpet'
+    SAXOPHONE = 'Saxophone'
 
 class Address(BaseModel):
     street_1: str

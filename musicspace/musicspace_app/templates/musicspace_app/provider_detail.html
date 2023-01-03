@@ -1,17 +1,17 @@
 {% extends 'musicspace_app/public_base.html' %}
 
 {% block content %}
-<div class="container-xxl">
+<div class="container-xxl py-5">
     <div class="row align-items-start">
-        <div class="col-md-auto">
-            <div class="row">
+        <div class="col-auto mx-4">
+            <div class="row justify-content-start">
                 {% if provider.image_url %}
                 <img class="provider-detail-image p-0" src="{{ provider.image_url }}"> 
                 {% else %}
                 <div class="provider-detail-image provider-detail-placeholder">Image Missing</div>
                 {% endif %}
             </div>
-            <div class="row px-2">
+            <div class="row justify-content-start">
                 <ul>
                     {% if provider.in_person %}
                     <li>In person lessons</li>
@@ -20,6 +20,9 @@
                     <li>Online lessons</li>
                     {% endif %}
                 </ul>
+            </div>
+            <div class="row justify-content-start">
+                <button type="button" class="btn btn-primary btn-lg provider-detail-button">Contact Teacher</button>
             </div>
         </div>
         <div class="col">
@@ -42,7 +45,7 @@
                 <p class="fs-5 fw-semibold">Genres</p>
                 <p class="fs-5 fw-normal lh-sm">
                     {% for genre in provider.genres %}
-                    {{ genre.value.title }}
+                    {{ genre.value }}
                     {% if not forloop.last %}
                     <br/>
                     {% endif %}
@@ -53,7 +56,7 @@
                 <p class="fs-5 fw-semibold">Instruments</p>
                 <p class="fs-5 fw-normal lh-sm">
                     {% for genre in provider.instruments %}
-                    {{ genre.value.title }}
+                    {{ genre.value }}
                     {% if not forloop.last %}
                     <br/>
                     {% endif %}
