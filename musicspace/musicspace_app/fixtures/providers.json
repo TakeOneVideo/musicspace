@@ -1,50 +1,12 @@
 {
     "providers": [
         {
-            "id": "326d1899-af5d-4b51-ae0d-a74362d5d9d2",
+            "id": "75848975-9d1d-4b8b-94e7-1b85ca201c8f",
             "name": {
-                "given_name": "Barbara",
-                "family_name": "Davis"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Sint nulla officia pariatur, velit veniam velit irure sunt mollit nostrud. Culpa cillum officia nisi. Ut pariatur ipsum non aute. Lorem fugiat incididunt ut aliqua et, duis reprehenderit minim ad aliqua ex. Esse quis eiusmod cillum sit aliquip voluptate voluptate, laboris ipsum excepteur excepteur et. Ullamco irure exercitation excepteur. In officia nostrud dolor officia mollit dolore, amet labore anim quis.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-01-16T22:30:14.705177"
-        },
-        {
-            "id": "d9b19f8f-e387-417d-845f-36ac67499791",
-            "name": {
-                "given_name": "Michael",
-                "family_name": "Jones"
+                "given_name": "James",
+                "family_name": "Martinez"
             },
             "gender": "male",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Laborum labore culpa sunt, aute cillum ad laboris incididunt sint in labore. Proident proident et aliqua, commodo sed incididunt ut ipsum sunt laborum excepteur, ullamco sit minim tempor sint velit. Reprehenderit ullamco in veniam velit ipsum fugiat, laboris enim aute dolore veniam. Fugiat voluptate fugiat eiusmod. Eiusmod reprehenderit in veniam fugiat.",
-            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-02-08T19:20:12.265030"
-        },
-        {
-            "id": "6d90fa87-0e99-435a-8e4e-1f3df72e4c6a",
-            "name": {
-                "given_name": "Barbara",
-                "family_name": "Davis"
-            },
-            "gender": "female",
             "title": "NAFME Certified Music Provider",
             "location": {
                 "street_1": "54 5th Ave",
@@ -52,72 +14,24 @@
                 "state": "NY",
                 "zip": "10057"
             },
-            "text": "Quis pariatur consectetur dolor. Aute in dolor elit adipiscing. Qui fugiat reprehenderit non in culpa. Velit qui dolor irure quis reprehenderit. Culpa qui veniam proident consequat. Mollit ipsum sed duis elit cillum minim. Duis voluptate proident nostrud occaecat aliquip occaecat ut, sed dolore ipsum aliqua eu reprehenderit duis.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-03-29T03:14:58.475234"
+            "text": "Nostrud voluptate anim qui. Veniam cillum sit eiusmod incididunt occaecat. Commodo dolor nisi cupidatat non deserunt, anim culpa aliquip anim elit. Enim incididunt ad commodo officia deserunt. Nostrud irure sit ad veniam aliquip.",
+            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
+            "genres": [
+                "country",
+                "jazz"
+            ],
+            "instruments": [
+                "cello"
+            ],
+            "in_person": true,
+            "online": false,
+            "created_date_time": "2022-01-08T14:45:45.433223"
         },
         {
-            "id": "9f309f3f-a0c5-449d-ac78-c2c3e4ff4eaf",
+            "id": "151e3395-4e21-4989-b01b-22bd24b49794",
             "name": {
                 "given_name": "John",
-                "family_name": "Brown"
-            },
-            "gender": "male",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Voluptate ipsum veniam culpa. Duis quis fugiat consequat ea magna aliquip, fugiat ipsum ad velit lorem ipsum. Duis consequat incididunt sit in incididunt excepteur, aliquip anim non commodo eu labore irure nisi. Reprehenderit occaecat incididunt velit deserunt sint, dolore duis eu laborum labore ea, officia occaecat anim tempor exercitation ullamco anim. Adipiscing enim nisi do mollit incididunt.",
-            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-04-03T04:03:20.347787"
-        },
-        {
-            "id": "cb1f7438-ce38-4ab4-b8b6-b5b62c2fe0a6",
-            "name": {
-                "given_name": "Karen",
-                "family_name": "Miller"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Velit velit ea ex veniam ea deserunt, fugiat aute ea aliquip nulla incididunt occaecat nostrud. Mollit veniam est duis. Commodo do esse dolore ipsum. Cillum commodo officia sit. Cillum veniam incididunt irure.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-04-26T08:15:55.647975"
-        },
-        {
-            "id": "1e654ac3-c9d4-4a05-991f-5827e966e044",
-            "name": {
-                "given_name": "Susan",
-                "family_name": "Brown"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Pariatur elit commodo eiusmod. Qui aliquip nisi mollit commodo dolor. Laboris ut laborum eu tempor. Nostrud nisi aliqua duis minim. Officia laborum velit occaecat ex do. Aute nisi labore anim sint. Adipiscing veniam nisi elit. Voluptate irure laboris sint sint. Eiusmod aliqua non adipiscing aute.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-05-09T02:09:42.149751"
-        },
-        {
-            "id": "be005677-45de-4ef6-94b2-6b2c7563b0c0",
-            "name": {
-                "given_name": "Robert",
-                "family_name": "Williams"
+                "family_name": "Davis"
             },
             "gender": "male",
             "title": "NAFME Certified Music Provider",
@@ -127,32 +41,23 @@
                 "state": "NY",
                 "zip": "10057"
             },
-            "text": "Dolor consectetur sit minim non excepteur duis, deserunt eu ea sed aute esse cupidatat. Dolore sit voluptate minim tempor id. Eu sunt fugiat tempor aliquip. Labore sed est tempor. Eiusmod velit irure dolore. Duis ad excepteur velit. Laboris mollit ea excepteur magna id laborum in. Eiusmod eiusmod nisi ad. Laborum excepteur ex et ea mollit dolor ea, do dolore duis eiusmod lorem aute irure.",
+            "text": "Nostrud pariatur incididunt ex fugiat. Laborum dolore minim qui reprehenderit exercitation amet sit, ut deserunt voluptate ut non officia, sunt excepteur minim quis pariatur proident. Aliquip aliqua laborum velit officia elit cupidatat sed, excepteur eu est ullamco ut irure laboris consectetur, cillum lorem voluptate cupidatat sed ut nostrud. Id amet do dolore id eiusmod. Et ex proident minim, commodo ea sunt sit esse adipiscing consequat, fugiat do eiusmod do dolore eu elit elit.",
             "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-05-15T04:15:43.055466"
+            "genres": [
+                "pop",
+                "country"
+            ],
+            "instruments": [
+                "trumpet"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-01-16T21:22:32.718780"
         },
         {
-            "id": "c071cdb3-1767-4662-b823-3c77f89d2ac4",
+            "id": "730b3b83-150a-4e0f-b61a-daf4642d580e",
             "name": {
-                "given_name": "William",
-                "family_name": "Miller"
-            },
-            "gender": "male",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "54 5th Ave",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10057"
-            },
-            "text": "Excepteur occaecat lorem reprehenderit anim laborum pariatur, duis labore qui irure ipsum. Labore ea irure aliqua dolore anim. Incididunt qui cillum consequat amet voluptate aute. Deserunt esse ullamco quis consectetur commodo, cillum pariatur sit aute culpa. Ea sint esse voluptate. Ex dolore adipiscing tempor qui est amet, ipsum elit aliqua ea qui deserunt ullamco, ullamco in ex esse. Veniam incididunt in consequat exercitation labore. Fugiat adipiscing magna officia id. Quis irure minim anim labore duis anim. Quis enim officia minim veniam dolor exercitation, esse nisi amet ea nostrud ut quis sed.",
-            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-06-15T16:26:27.542512"
-        },
-        {
-            "id": "5895a8d1-29f9-4604-a54d-142a0a050c38",
-            "name": {
-                "given_name": "Sara",
+                "given_name": "Patricia",
                 "family_name": "Smith"
             },
             "gender": "female",
@@ -164,33 +69,53 @@
                 "state": "NY",
                 "zip": "10011"
             },
-            "text": "In occaecat cillum cillum do voluptate proident. Excepteur est eiusmod excepteur. Velit sunt sunt et incididunt irure ipsum. Nostrud anim occaecat amet mollit minim est, velit lorem est officia proident veniam. Cupidatat enim consectetur reprehenderit ea.",
+            "text": "Occaecat laboris laboris eu quis in. Exercitation sunt ullamco labore laborum veniam reprehenderit, elit nisi excepteur in amet eiusmod magna ut. Ipsum velit in aliqua reprehenderit cillum. Sunt eiusmod aliquip esse. Ullamco fugiat fugiat velit consequat et. Esse dolor pariatur qui, id ex ad deserunt. Consequat tempor enim in deserunt quis. Commodo laborum nostrud officia in reprehenderit, qui veniam laboris et est aliquip consectetur.",
             "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-06-24T17:54:33.288752"
+            "genres": [
+                "rock",
+                "pop"
+            ],
+            "instruments": [
+                "saxophone",
+                "guitar",
+                "trumpet"
+            ],
+            "in_person": true,
+            "online": false,
+            "created_date_time": "2022-01-22T12:22:18.917270"
         },
         {
-            "id": "7ce61f37-59e0-4d56-8523-0ca6e189cec9",
+            "id": "504c5545-3a6f-40f5-8470-b47d4efd8f79",
             "name": {
-                "given_name": "John",
-                "family_name": "Martinez"
+                "given_name": "Karen",
+                "family_name": "Davis"
             },
-            "gender": "male",
+            "gender": "female",
             "title": "NAFME Certified Music Provider",
             "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
+                "street_1": "54 5th Ave",
                 "city": "New York",
                 "state": "NY",
-                "zip": "10011"
+                "zip": "10057"
             },
-            "text": "Aliqua pariatur pariatur excepteur sed. Et exercitation ad quis minim exercitation velit sit, dolor exercitation velit tempor sed duis eu adipiscing. Laborum in duis amet ullamco pariatur in do. Ea do ex exercitation ullamco. Id minim ullamco reprehenderit ea pariatur laboris. Reprehenderit veniam ad non duis aliqua qui, in irure aute ipsum sit duis exercitation mollit. Consectetur labore velit laborum laborum. Ad consequat mollit adipiscing.",
-            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-07-20T01:36:41.558237"
+            "text": "Nulla cillum enim et, sunt enim culpa incididunt labore. Ex officia dolor dolor aliqua aute lorem ut. Fugiat tempor nulla amet sint nostrud. Deserunt est lorem ea. Minim magna laborum proident.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "pop",
+                "rock",
+                "r_and_b"
+            ],
+            "instruments": [
+                "voice"
+            ],
+            "in_person": false,
+            "online": true,
+            "created_date_time": "2022-02-07T23:05:53.875742"
         },
         {
-            "id": "acee7b83-13e0-4d38-9992-c394c252430d",
+            "id": "3f583e0a-183b-4074-9021-a1bf9f2bf16e",
             "name": {
-                "given_name": "Susan",
+                "given_name": "Karen",
                 "family_name": "Miller"
             },
             "gender": "female",
@@ -201,72 +126,24 @@
                 "state": "NY",
                 "zip": "10057"
             },
-            "text": "Quis laboris ad laboris aliqua voluptate duis duis. Aliquip sint consectetur magna dolore cillum, nostrud ex ea enim consectetur ex labore exercitation. Fugiat occaecat tempor culpa eu, minim cupidatat cupidatat id. Pariatur minim veniam id sint. Cupidatat aute proident anim magna tempor elit proident. Consequat aliquip est ut reprehenderit enim cupidatat. Sunt ad voluptate proident aute ut occaecat elit. Ad occaecat et in consequat, ullamco ea sit voluptate ex officia, exercitation aute adipiscing aliquip minim ex pariatur. Est exercitation elit amet sit. Adipiscing et nostrud elit culpa voluptate id sunt.",
+            "text": "Sunt laboris sint consequat ipsum do, aliqua cillum enim voluptate proident. Duis aute id sint magna sint labore. Do nisi sunt id in commodo nisi adipiscing. Anim laboris tempor anim deserunt do. Nulla eu incididunt elit. Exercitation dolor ipsum aliqua pariatur ex consectetur. Dolor ea ut et deserunt, mollit tempor sed commodo tempor aute pariatur. Laborum elit qui consequat lorem sunt consectetur. Laboris sed culpa et ex aliqua dolore occaecat, cillum consectetur id velit et esse mollit incididunt.",
             "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-07-21T15:10:28.952095"
+            "genres": [
+                "classical",
+                "jazz"
+            ],
+            "instruments": [
+                "guitar"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-02-25T16:34:30.307425"
         },
         {
-            "id": "a7ba8841-8cf2-4c63-b746-492c78e6087d",
+            "id": "5bad7e1c-08b0-4b62-a81f-36ca83a2a359",
             "name": {
-                "given_name": "Mary",
-                "family_name": "Davis"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Lorem dolor ad veniam labore, exercitation ullamco enim sint nostrud commodo in ullamco. Mollit exercitation dolor anim reprehenderit ea minim. Commodo dolor excepteur ullamco cillum. Dolor laborum ex pariatur exercitation et, minim excepteur consectetur elit consequat consequat. Dolor duis dolor exercitation, irure anim commodo tempor commodo ad esse.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-07-28T13:27:26.063842"
-        },
-        {
-            "id": "c8d7f4e0-096c-439e-bacc-d161a3787b3f",
-            "name": {
-                "given_name": "Sara",
+                "given_name": "Joseph",
                 "family_name": "Garcia"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Aute lorem ullamco magna adipiscing fugiat tempor veniam. Do duis non cillum voluptate, reprehenderit aute lorem ex. Voluptate sed deserunt aute laborum labore exercitation. Voluptate amet cupidatat eu quis laborum velit, commodo laboris incididunt nisi. Esse nisi laboris nulla excepteur officia cillum. Irure nulla minim dolor aliquip ipsum excepteur amet, dolore deserunt in irure.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-08-07T11:57:03.843502"
-        },
-        {
-            "id": "3eb016fb-4ff9-4960-a038-0ff0619b12cf",
-            "name": {
-                "given_name": "Jennifer",
-                "family_name": "Rodriguez"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "1 1st Ave",
-                "street_2": "Suite 100",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10011"
-            },
-            "text": "Irure consectetur anim commodo pariatur, lorem aliquip duis excepteur. Pariatur sit quis qui. Amet aliquip laboris laborum officia enim. Ullamco labore laboris est pariatur nisi in. Non proident consequat elit. Non est consequat amet labore eiusmod. Esse eiusmod officia ex ullamco minim enim irure, veniam duis amet do deserunt, fugiat et magna dolor cupidatat est dolore. Ad in aute fugiat sint, pariatur elit ipsum sunt consectetur ea in.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-08-17T01:21:51.302018"
-        },
-        {
-            "id": "9b357dcd-8c53-4c68-b2b3-39773785c2ac",
-            "name": {
-                "given_name": "William",
-                "family_name": "Davis"
             },
             "gender": "male",
             "title": "NAFME Certified Music Provider",
@@ -276,15 +153,214 @@
                 "state": "NY",
                 "zip": "10057"
             },
-            "text": "Minim voluptate reprehenderit aliquip. Officia ex nisi sunt. Consequat cupidatat enim pariatur qui nulla. Laborum duis sunt aliqua sint ullamco, nulla reprehenderit voluptate eiusmod. Ipsum reprehenderit labore nisi ipsum do sint est, amet et occaecat ea. Consequat laboris labore elit ex esse, voluptate culpa mollit commodo, duis sunt laborum excepteur ex esse. Ut consectetur minim quis dolore adipiscing. Sed velit aliqua sit reprehenderit incididunt sunt adipiscing. Reprehenderit ipsum pariatur sit cillum.",
+            "text": "Pariatur duis excepteur dolore laborum culpa et in, amet sed enim officia magna ut. Excepteur sit sint non pariatur ea nisi culpa. Consectetur labore amet reprehenderit deserunt aute aute proident. Nisi laborum mollit consequat. Consectetur in consequat reprehenderit non. Occaecat consectetur exercitation officia enim ipsum ad. Dolor irure incididunt cupidatat, nisi irure sunt laborum.",
             "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-08-17T12:02:13.438799"
+            "genres": [
+                "r_and_b",
+                "rock"
+            ],
+            "instruments": [
+                "guitar"
+            ],
+            "in_person": false,
+            "online": true,
+            "created_date_time": "2022-03-22T19:21:16.130676"
         },
         {
-            "id": "dc378a5e-bfb3-4dae-b08a-cd20dd12a95a",
+            "id": "dac057b1-e144-42ae-ac4d-38d0e4d5bd95",
             "name": {
                 "given_name": "Joseph",
-                "family_name": "Rodriguez"
+                "family_name": "Brown"
+            },
+            "gender": "male",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Nulla velit minim aliquip. Ipsum magna voluptate non ipsum ut, sed culpa id irure cillum excepteur, sit cupidatat magna est. Velit qui id est incididunt lorem minim pariatur. Fugiat aute culpa voluptate adipiscing anim nostrud esse. Sed aute ut do, ullamco quis nisi incididunt anim laborum laborum. Veniam ipsum nostrud laboris anim aute pariatur excepteur. Proident proident excepteur enim nisi, consequat cillum aliquip labore minim minim tempor quis.",
+            "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
+            "genres": [
+                "country"
+            ],
+            "instruments": [
+                "drums",
+                "voice"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-04-09T21:53:54.377535"
+        },
+        {
+            "id": "ba7eae25-5281-4c42-9073-eca898365516",
+            "name": {
+                "given_name": "Jennifer",
+                "family_name": "Brown"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Sint enim duis anim enim, mollit ad tempor cupidatat dolore dolore in et. Mollit sed est anim velit tempor. Id incididunt aliqua ipsum. Aliqua lorem fugiat sit consectetur exercitation. Est ut dolor sint sunt.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "country"
+            ],
+            "instruments": [
+                "drums"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-05-24T17:16:20.380745"
+        },
+        {
+            "id": "98927046-c7a3-41be-909f-cb77039d512e",
+            "name": {
+                "given_name": "Jennifer",
+                "family_name": "Johnson"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Id duis eiusmod occaecat ut, ullamco est lorem ipsum irure. Qui adipiscing occaecat sit ullamco, reprehenderit ad eiusmod adipiscing. Do do ullamco sunt consequat deserunt, cupidatat incididunt deserunt amet consequat, ea ad officia exercitation exercitation sunt irure. Veniam aute nostrud ea, incididunt quis cupidatat laborum consequat consectetur, eiusmod incididunt proident magna anim. Do tempor voluptate sunt pariatur commodo, deserunt in nostrud est labore eiusmod aliquip, commodo cillum nulla eiusmod ea aliqua. Nostrud do laborum commodo aliquip est in officia, reprehenderit anim incididunt aliqua. Culpa aute ad officia deserunt ex irure incididunt, non deserunt consequat non velit esse do. Sit tempor laborum culpa est. Sed do nisi tempor consectetur do et, magna cillum incididunt eiusmod incididunt magna sed nostrud.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "pop",
+                "classical"
+            ],
+            "instruments": [
+                "trumpet"
+            ],
+            "in_person": false,
+            "online": true,
+            "created_date_time": "2022-05-27T05:38:59.236498"
+        },
+        {
+            "id": "c77b8f15-53e1-4ddc-b0d6-b29c92226e9f",
+            "name": {
+                "given_name": "Karen",
+                "family_name": "Williams"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Cupidatat dolor consectetur magna elit qui pariatur, lorem adipiscing lorem amet pariatur elit nostrud occaecat. Aute culpa enim reprehenderit. Fugiat irure velit anim nisi. Excepteur ut cupidatat nulla pariatur ex eiusmod eu. Incididunt quis incididunt aute eu.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "jazz"
+            ],
+            "instruments": [
+                "trumpet"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-06-10T05:58:21.002797"
+        },
+        {
+            "id": "d4d29f19-1be6-4084-aa89-0e314e9620ae",
+            "name": {
+                "given_name": "Mary",
+                "family_name": "Brown"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "1 1st Ave",
+                "street_2": "Suite 100",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10011"
+            },
+            "text": "Ex in excepteur esse ipsum nulla irure. Anim anim velit proident quis laborum. Dolor aliqua enim adipiscing. Do non sunt veniam laboris, mollit nisi nulla aliquip, laborum consectetur laboris excepteur. Ullamco veniam est ea culpa esse fugiat. Dolor magna cupidatat sint deserunt in. Occaecat et sit adipiscing lorem, deserunt in ea irure cillum non do aliquip.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "r_and_b"
+            ],
+            "instruments": [
+                "saxophone"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-06-22T00:02:41.182623"
+        },
+        {
+            "id": "66e8b273-d2ad-49f0-8a02-ebe9d00cab8b",
+            "name": {
+                "given_name": "Jessica",
+                "family_name": "Martinez"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Veniam anim proident velit adipiscing. Pariatur aliquip mollit nostrud. Dolor amet irure fugiat officia tempor, sunt minim dolore tempor proident enim magna ullamco. Nisi sunt in laborum. Dolore exercitation reprehenderit voluptate sint magna. Non cupidatat tempor excepteur duis officia esse irure. Tempor anim sunt officia consectetur minim consectetur laborum. Labore consequat quis ut nulla amet excepteur. Id pariatur nostrud proident nulla, id eiusmod amet mollit esse. Tempor non veniam in deserunt minim ad consectetur.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "rock",
+                "classical",
+                "jazz"
+            ],
+            "instruments": [
+                "bass"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-07-12T07:24:54.740460"
+        },
+        {
+            "id": "ab67cef0-a73c-47ae-86d2-5bf8ac0723fd",
+            "name": {
+                "given_name": "John",
+                "family_name": "Johnson"
+            },
+            "gender": "nonbinary",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Laborum commodo culpa adipiscing. Aliqua commodo velit fugiat incididunt commodo, ea in aliquip velit fugiat eiusmod anim excepteur. Eiusmod elit mollit consequat sed. Veniam fugiat sunt laborum, cillum incididunt nostrud consectetur minim consectetur et eu, dolor eu do elit amet do ut. Cupidatat reprehenderit do consequat, elit non occaecat fugiat ullamco anim, dolore velit velit enim ex sed. Consectetur nulla est aliquip ad, in pariatur amet consequat dolore lorem aliqua. Consequat nostrud eu sunt do esse.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "pop",
+                "rock",
+                "r_and_b"
+            ],
+            "instruments": [
+                "voice",
+                "trumpet"
+            ],
+            "in_person": true,
+            "online": false,
+            "created_date_time": "2022-07-27T14:25:55.016753"
+        },
+        {
+            "id": "f2e108a2-d1b7-436e-b7da-eeb60881d536",
+            "name": {
+                "given_name": "Richard",
+                "family_name": "Brown"
             },
             "gender": "male",
             "title": "NAFME Certified Music Provider",
@@ -295,14 +371,22 @@
                 "state": "NY",
                 "zip": "10011"
             },
-            "text": "Sunt culpa est adipiscing duis amet. Nisi consequat cillum cupidatat deserunt ut. Non consequat sit esse laborum sit. Aliquip enim ea in laborum exercitation, ex labore culpa pariatur. Excepteur et laborum nostrud excepteur incididunt minim. Adipiscing et eu ex aliquip id. Esse est eu aliqua.",
+            "text": "Proident deserunt labore officia, non reprehenderit nisi consequat aliqua ullamco. Do non laboris sint incididunt deserunt ea. Culpa ex lorem est cillum culpa cupidatat duis, ad quis eu nostrud in nulla. Dolore nisi esse mollit adipiscing duis, do sunt ea enim laboris labore. Reprehenderit eu occaecat est pariatur, est adipiscing elit lorem pariatur. Cupidatat do ipsum culpa veniam adipiscing commodo. Dolore consectetur veniam fugiat culpa in aliqua irure. Exercitation ut nisi ut ex officia est sunt. Ex exercitation occaecat proident exercitation. Deserunt consequat incididunt mollit excepteur adipiscing anim.",
             "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-10-20T16:34:33.688214"
+            "genres": [
+                "pop"
+            ],
+            "instruments": [
+                "saxophone"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-08-17T21:11:31.348468"
         },
         {
-            "id": "050d3b85-c1c9-4c46-8f54-c7f2c078b16b",
+            "id": "cda5ed82-0023-419f-a5a1-3cb61eed45f1",
             "name": {
-                "given_name": "Patricia",
+                "given_name": "Linda",
                 "family_name": "Johnson"
             },
             "gender": "female",
@@ -314,51 +398,26 @@
                 "state": "NY",
                 "zip": "10011"
             },
-            "text": "Consequat ea aute do anim ad ipsum sunt. Id incididunt amet veniam id. Do dolor dolore velit. Voluptate anim ad adipiscing occaecat. Consectetur in magna nulla aute velit nostrud. Dolor laboris aliquip sint ex eu, ullamco sunt id esse esse eiusmod anim. Excepteur ut ullamco aliquip ullamco ut do consectetur, magna exercitation ipsum sunt cupidatat. Dolore enim ea ut quis proident. Lorem cillum irure labore duis.",
+            "text": "Proident cillum aute consectetur sunt. Non pariatur non esse proident, consequat sit ad tempor est laborum, in id ea eiusmod in. Sunt lorem mollit ipsum ut anim. Eu excepteur pariatur cillum magna deserunt, sunt culpa esse voluptate. Nisi dolore deserunt lorem laboris et.",
             "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-10-31T09:22:50.791960"
+            "genres": [
+                "classical",
+                "pop"
+            ],
+            "instruments": [
+                "cello",
+                "bass",
+                "guitar"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-08-22T17:24:32.407632"
         },
         {
-            "id": "6b13180a-e587-4eb3-92cb-b3bc584c10fd",
+            "id": "1f318a2f-1c1a-46b2-ab70-8f44316f8adc",
             "name": {
-                "given_name": "Jennifer",
-                "family_name": "Miller"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "54 5th Ave",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10057"
-            },
-            "text": "Labore esse enim sed. Ea esse cillum incididunt, cupidatat id nostrud culpa eu eiusmod laboris. Et nostrud sunt laborum amet excepteur, lorem dolor commodo ea. Do proident aliqua adipiscing ut ut. In sint aliqua dolore incididunt deserunt. Labore dolore duis lorem labore ea, qui amet enim quis pariatur, excepteur occaecat sunt enim sit aute consequat.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-11-24T03:51:12.170644"
-        },
-        {
-            "id": "e5cdb9b9-3d25-4cdb-bf86-c5bcd96318ac",
-            "name": {
-                "given_name": "Mary",
-                "family_name": "Jones"
-            },
-            "gender": "female",
-            "title": "NAFME Certified Music Provider",
-            "location": {
-                "street_1": "54 5th Ave",
-                "city": "New York",
-                "state": "NY",
-                "zip": "10057"
-            },
-            "text": "Mollit culpa est in ea. Exercitation esse officia cillum. Eu sint incididunt sed laboris. Do sunt excepteur incididunt amet nulla do. In aliqua laboris fugiat dolor laborum exercitation occaecat, occaecat ex aute incididunt eu voluptate eu quis. Do incididunt tempor irure irure adipiscing pariatur, cupidatat qui occaecat cillum non consectetur, irure nostrud id dolor dolore. Pariatur occaecat duis sed incididunt, cillum qui in esse occaecat officia consequat. Sunt est ea minim amet velit, enim fugiat aliqua labore est qui elit, reprehenderit sit eiusmod ut magna. Sed nisi cillum qui.",
-            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
-            "created_date_time": "2022-12-12T07:34:22.352465"
-        },
-        {
-            "id": "3ebef0c8-a1f3-4902-8bea-fb11c6cd5d7d",
-            "name": {
-                "given_name": "Thomas",
-                "family_name": "Smith"
+                "given_name": "William",
+                "family_name": "Brown"
             },
             "gender": "male",
             "title": "NAFME Certified Music Provider",
@@ -369,9 +428,127 @@
                 "state": "NY",
                 "zip": "10011"
             },
-            "text": "Ea do eu dolor dolore enim qui. Esse irure commodo consequat cupidatat sed enim aute, mollit sed ullamco incididunt mollit. Do voluptate proident sed, dolor lorem reprehenderit commodo consequat, ea velit anim veniam est ut magna duis. Cupidatat elit aliqua nostrud adipiscing nostrud, lorem officia nisi ea ex consectetur velit, magna nisi dolor consectetur. Amet qui elit dolore quis non do culpa. Fugiat incididunt in exercitation, irure occaecat cupidatat lorem. Exercitation consectetur esse deserunt elit enim, laboris amet esse ullamco nostrud veniam esse. Eiusmod aliquip culpa non. Labore est excepteur veniam. Dolor sit sed et et, magna laborum amet nulla aliqua ex exercitation.",
+            "text": "Reprehenderit sit ullamco est exercitation. Mollit tempor veniam culpa. Anim ad in veniam dolore exercitation irure. Veniam dolor officia magna quis do lorem consectetur. Qui reprehenderit consectetur non, nostrud nulla laboris lorem incididunt aliquip. Anim amet tempor aliquip aliqua labore.",
             "image_url": "http://rockandrollgarage.com/wp-content/uploads/2021/01/Dave-Grohl-2.jpg",
-            "created_date_time": "2022-12-27T15:47:30.322223"
+            "genres": [
+                "country"
+            ],
+            "instruments": [
+                "cello"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-09-09T16:41:28.544930"
+        },
+        {
+            "id": "e187b7aa-29a9-4d86-ae7f-d7500ae9133c",
+            "name": {
+                "given_name": "Karen",
+                "family_name": "Martinez"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "1 1st Ave",
+                "street_2": "Suite 100",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10011"
+            },
+            "text": "Est est sunt proident. Veniam elit in mollit, sunt deserunt non do enim ipsum lorem sit. Esse commodo elit velit. Fugiat sint fugiat dolor irure et culpa exercitation, aute veniam magna amet qui non ex fugiat. Cillum dolore aute deserunt ea, enim magna magna lorem mollit. In sit sed sed cupidatat lorem, do in amet occaecat do consequat. Laboris lorem reprehenderit sed in. Est esse aute anim pariatur. Culpa incididunt reprehenderit eiusmod consectetur officia sunt adipiscing.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "rock"
+            ],
+            "instruments": [
+                "drums"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-09-12T15:25:12.688633"
+        },
+        {
+            "id": "d621e953-ef77-4eae-9ef9-4fde8a3f6b16",
+            "name": {
+                "given_name": "Barbara",
+                "family_name": "Williams"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Enim duis velit dolor, sint culpa sit ad elit eiusmod. Anim velit id non, magna duis irure irure nisi ad cillum. Labore velit cupidatat nulla aliquip anim, tempor in pariatur ea culpa amet. Velit do eiusmod reprehenderit veniam in amet aute, exercitation eu pariatur et, reprehenderit qui anim aute proident aliqua. Non nisi aliqua laboris officia lorem ullamco sunt, deserunt duis mollit qui veniam aliquip ut irure. Ad nisi pariatur excepteur labore duis aute. Non duis aliquip cupidatat consectetur aute deserunt elit.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "r_and_b",
+                "pop"
+            ],
+            "instruments": [
+                "cello"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-09-27T12:37:33.870036"
+        },
+        {
+            "id": "cc008240-2646-4391-8126-9506cb02a769",
+            "name": {
+                "given_name": "Linda",
+                "family_name": "Martinez"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Consectetur adipiscing tempor ipsum ex sit. Proident duis aliquip reprehenderit anim enim qui quis, tempor veniam laborum nostrud sint reprehenderit labore. Sint sed lorem commodo deserunt, proident incididunt reprehenderit nisi. Anim laborum commodo elit lorem ea. Do officia aute ullamco aute aliqua. Excepteur commodo duis fugiat labore in laborum. Incididunt enim proident cillum. Mollit cupidatat sint cupidatat cupidatat voluptate, in id consequat sunt veniam, eu aliquip veniam magna in eiusmod incididunt.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "country",
+                "pop",
+                "classical",
+                "r_and_b"
+            ],
+            "instruments": [
+                "drums"
+            ],
+            "in_person": true,
+            "online": true,
+            "created_date_time": "2022-12-09T19:42:17.362934"
+        },
+        {
+            "id": "79349dfe-6f7b-402c-b475-a982a657cdf8",
+            "name": {
+                "given_name": "Jennifer",
+                "family_name": "Williams"
+            },
+            "gender": "female",
+            "title": "NAFME Certified Music Provider",
+            "location": {
+                "street_1": "54 5th Ave",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10057"
+            },
+            "text": "Et quis proident ad, tempor non ad adipiscing ad ad ut nisi. Commodo nostrud anim cupidatat. Nulla dolore labore laboris proident ex. Ea eiusmod exercitation sed consequat dolore lorem, ad aliqua nostrud sit aliqua. Et quis nulla tempor ea, sunt minim exercitation sed occaecat nostrud. Dolore deserunt enim quis commodo. Quis ad proident commodo adipiscing incididunt. Do ipsum aliquip aliquip ex veniam. Magna et quis veniam eiusmod in irure, eiusmod aliquip nostrud enim, dolor pariatur fugiat sunt esse duis ipsum proident. Quis duis nulla anim.",
+            "image_url": "https://media.pitchfork.com/photos/5cd4956093a5367fe31ed7d7/16:9/w_1280,c_limit/St%2520Vincent%25202009.png",
+            "genres": [
+                "rock"
+            ],
+            "instruments": [
+                "drums",
+                "cello"
+            ],
+            "in_person": true,
+            "online": false,
+            "created_date_time": "2022-12-22T22:39:21.513556"
         }
     ]
 }

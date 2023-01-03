@@ -4,6 +4,7 @@ import uuid
 import random
 from datetime import datetime
 import lorem
+from typing import List, Tuple
 ## This is needed in order to reference the imports from the level above
 sys.path.append(os.path.realpath('../..'))
 
@@ -11,7 +12,7 @@ output_file = '/src/musicspace_app/fixtures/providers.json'
 
 from musicspace_app.models import (
     Provider, ProviderFile, 
-    Name, Address, Gender
+    Name, Address, Gender, Genre, Instrument
 )
 
 male_given_names = [
@@ -65,6 +66,19 @@ female_image_urls = [
 
 starting_timestamp = 1640922589
 ending_timestamp = 1672458589
+
+GENRE_DISTRIBUTION = [
+    1, 1,
+    2, 2, 2, 2,
+    3, 3,
+    4 
+]
+
+INSTRUMENT_DISTRIBUTION = [
+    1, 1, 1, 1,
+    2, 2, 
+    3
+]
 
 locations = [
     Address(
@@ -132,6 +146,21 @@ def generate_random_created_date_time() -> datetime:
 def generate_random_text() -> str:
     return lorem.get_paragraph()
 
+def generate_genres() -> List[Genre]:
+    count = random.choice(GENRE_DISTRIBUTION)
+    return random.sample(list(Genre.__members__.values()), k=count)
+
+def generate_instruments() -> List[Instrument]:
+    count = random.choice(INSTRUMENT_DISTRIBUTION)
+    return random.sample(list(Instrument.__members__.values()), k=count)
+
+def generate_in_person_online() -> Tuple[bool, bool]:
+    in_person_value = random.random()
+    if in_person_value > 0.8:
+        return (False, True)
+    else:
+        online_value = random.random()
+        return (True, online_value <= 0.75)
 
 def generate_random_provider() -> Provider:
     tid = uuid.uuid4()
@@ -147,6 +176,12 @@ def generate_random_provider() -> Provider:
     # print(image_url)
     created_date_time = generate_random_created_date_time()
 
+    genres = generate_genres()
+
+    instruments = generate_instruments()
+
+    (in_person, online) = generate_in_person_online()
+
     text = generate_random_text()
 
     return Provider(
@@ -157,6 +192,10 @@ def generate_random_provider() -> Provider:
         location=location,
         text=text,
         image_url=image_url,
+        genres=genres,
+        instruments=instruments,
+        in_person=in_person,
+        online=online,
         created_date_time=created_date_time
     )
 

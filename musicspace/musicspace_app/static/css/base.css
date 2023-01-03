@@ -43,7 +43,6 @@ body {
 }
 
 .provider-list-item-image {
-    /* height: 288px; */
     object-fit: cover;
     border-radius: 4px;
     height: 200px;
@@ -66,6 +65,7 @@ body {
     background-color: #DF3DB6 !important;
     color: #FBF8FF !important;
     border-color: #8C2D99 !important;
+    min-width: 200px;
 }
 
 .provider-list-item-text {
@@ -75,4 +75,35 @@ body {
 .link-no-styling {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.provider-detail-image {
+    object-fit: cover;
+    border-radius: 4px;
+    height: 200px;
+    width: 200px;
+}
+
+.provider-detail-placeholder {
+    width: 512px;
+    /* border: 0.5px solid; */
+    /* border-color: black; */
+    background-color: lightgray;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    color: blue;
+    overflow: hidden;
 }

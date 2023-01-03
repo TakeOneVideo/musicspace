@@ -5,6 +5,23 @@ from uuid import UUID
 from datetime import datetime
 from enum import Enum
 
+class Genre(str, Enum):
+    CLASSICAL = 'classical'
+    JAZZ = 'jazz'
+    POP = 'pop'
+    ROCK = 'rock'
+    R_AND_B = 'r_and_b'
+    COUNTRY = 'country'
+
+class Instrument(str, Enum):
+    VOICE = 'voice'
+    GUITAR = 'guitar'
+    BASS = 'bass'
+    DRUMS = 'drums'
+    CELLO = 'cello'
+    TRUMPET = 'trumpet'
+    SAXOPHONE = 'saxophone'
+
 class Address(BaseModel):
     street_1: str
     street_2: Optional[str]
@@ -49,6 +66,10 @@ class Provider(BaseModel):
     location: Address
     text: str
     image_url: str
+    genres: List[Genre]
+    instruments: List[Instrument]
+    in_person: bool
+    online: bool
     created_date_time: datetime
 
     @property
