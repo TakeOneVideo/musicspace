@@ -42,7 +42,7 @@ class PyGender(str, Enum):
     NONBINARY = 'nonbinary'
     OTHER = 'other'
 
-NUMBER_OF_PROVIDERS_TO_ADD = 100
+NUMBER_OF_PROVIDERS_TO_ADD = 1000
 
 GENRES = [
     ('classical', 'Classical'),
