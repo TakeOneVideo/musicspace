@@ -7,15 +7,20 @@ from musicspace_app.models import Provider
 from django.core.paginator import Paginator 
 from dataclasses import dataclass, asdict
 import urllib.parse
+from enum import Enum
+
+
+class Modality(str, Enum):
+    IN_PERSON_ONLY = 'in_person_only'
+    ONLINE_ONLY = 'online_only'
+    EITHER = 'either'
+
+@dataclass
+class QueryParameters:
+    modality: Modality = Modality.EITHER
 
 DEFAULT_PAGE_SIZE = 10
 class ProviderListView(TemplateView):
-
-    @dataclass
-    class QueryParameters:
-        in_person: Optional[bool] = None
-        online: Optional[bool] = None
-
 
     ## this needs to differentiate between the initial load
     ## the filters being updated
@@ -33,19 +38,9 @@ class ProviderListView(TemplateView):
         self,
         d: Dict
     ) -> QueryParameters:
-
-        if 'in_person' not in d:
-            in_person = False
-        else:
-            in_person = None
-        if 'online' not in d:
-            online = False
-        else:
-            online = None
-
-        return self.QueryParameters(
-            in_person=in_person,
-            online=online
+        print(d)
+        return QueryParameters(
+            modality=d.get('modality')
         )
 
     def _generate_url_from_query_params(
@@ -54,31 +49,63 @@ class ProviderListView(TemplateView):
         next_page_index: Optional[int] = None
     ) -> str:
         base_url = reverse('musicspace:provider-list')
+
+        ## we should probably only include these if they are different than defaults
         query_dict = {key: value for (key, value) in asdict(query_params).items() if value is not None} 
         if next_page_index:
             query_dict['page'] = next_page_index
         query_string = urllib.parse.urlencode(query_dict)
         return "%s?%s" % (base_url, query_string)
 
+    def get_queryset(
+        self,
+        query_params: QueryParameters
+    ):
+        providers_queryset = Provider.objects.all()
+
+        print(query_params)
+
+        if query_params.modality == Modality.IN_PERSON_ONLY:
+            providers_queryset = providers_queryset.exclude(
+                in_person=False
+            )
+
+        elif query_params.modality == Modality.ONLINE_ONLY:
+            providers_queryset = providers_queryset.exclude(
+                online=False
+            )
+
+        providers_queryset = providers_queryset.select_related('user', 'location')\
+            .order_by('user__date_joined')
+
+        return providers_queryset
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
-        providers = Provider.objects.all()\
-            .select_related('user', 'location')\
-            .order_by('user__date_joined')
-        paginator = Paginator(providers, DEFAULT_PAGE_SIZE)
-
-        page_number = int(self.request.GET.get('page', 1))
-        context['page_of_providers'] = paginator.get_page(page_number)
-        next_page_index = page_number + 1
-        if next_page_index <= paginator.num_pages:
+        print(self.request.GET)
+        if not self.request.GET:
+            query_params = QueryParameters()
+        else:
             query_params = self._generate_query_params_from_input(
                 d=self.request.GET
             )
+
+        context['query_params'] = query_params
+
+        providers_queryset = self.get_queryset(query_params=query_params)
+        paginator = Paginator(providers_queryset, DEFAULT_PAGE_SIZE)
+
+        page_number = int(self.request.GET.get('page', 1))
+        context['page_of_providers'] = paginator.get_page(page_number)
+
+        next_page_index = page_number + 1
+        if next_page_index <= paginator.num_pages:
+            
             context['next_page_url'] = self._generate_url_from_query_params(
                 query_params=query_params,
                 next_page_index=next_page_index
             )
+
 
         context['total_provider_count'] = paginator.count
 
@@ -86,11 +113,14 @@ class ProviderListView(TemplateView):
 
     ## extract form params, compute url and redirect
     def post(self, request, *args, **kwargs):
+
+        print(self.request.POST)
         query_params = self._generate_query_params_from_input(
             d=self.request.POST
         )
 
         url = self._generate_url_from_query_params(query_params)
+        print(url)
         return HttpResponseRedirect(url)
 
 class ProviderDetailView(TemplateView):

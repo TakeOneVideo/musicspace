@@ -6,10 +6,23 @@
         <div class="col-3">
             <form id="provider-search-filter" action="{% url 'musicspace:provider-list' %}" method="post">
                 {% csrf_token %}
+                <p class="fs-5 fw-semibold">I'm looking for:</p>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="in_person" id="in_person" checked>
-                    <label class="form-check-label" for="in_person">
-                        In Person
+                    <input class="form-check-input" type="radio" name="modality" id="in_person_only" value="in_person_only" {% if query_params.modality == "in_person_only" %} checked {% endif %}>
+                    <label class="form-check-label" for="in_person_only">
+                        In Person Lessons Only
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="modality" id="online_only" value="online_only" {% if query_params.modality == "online_only" %} checked {% endif %}>
+                    <label class="form-check-label" for="online_only">
+                        Online Lessons Only
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="modality" id="either" value="either" {% if query_params.modality == "either" %} checked {% endif %}>
+                    <label class="form-check-label" for="either">
+                        Either
                     </label>
                 </div>
                 <button type="submit">Submit</button>
