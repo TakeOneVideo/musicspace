@@ -4,6 +4,7 @@ body {
 
 .musicspace-navbar {
     background-color: #FBF8FF !important;
+    border-bottom: 1px solid darkgray;
 }
 
 .musicspace-navbar-title {
@@ -16,6 +17,10 @@ body {
     color: #DF3DB6 !important;
     font-size: 24px;
     font-weight: 500;
+}
+
+.musicspace-navbar-item-end {
+    width: 200px;
 }
 
 .provider-list-layout {

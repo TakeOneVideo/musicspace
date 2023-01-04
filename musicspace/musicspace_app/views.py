@@ -13,6 +13,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
+from django.views.generic.edit import UpdateView
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:login'
@@ -28,19 +29,19 @@ class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
 
 class ProviderLoginView(LoginView):
     template_name = 'musicspace_app/login.html'
-    next_page = 'musicspace:for-teachers'
+    next_page = 'musicspace:provider-profile'
 
     def get(self, request, *args, **kwargs):
         redirect_url = self.request.GET.get(self.redirect_field_name, '')
         if redirect_url:
             return super().get(request, *args, **kwargs)
         else:
-            current_page = reverse('musicspace:login')
+            current_page = reverse('musicspace:provider-login')
             next_page = reverse(self.next_page)
             return redirect(f'{current_page}?{self.redirect_field_name}={next_page}')
 
 class ProviderLogoutView(LogoutView):
-    template_name = 'musicspace_app/logged_out.html'
+    next_page ='musicspace:index'
 
 class Modality(str, Enum):
     IN_PERSON_ONLY = 'in_person_only'
@@ -185,8 +186,21 @@ class ProviderDetailView(TemplateView):
         context['provider'] = self.get_provider()
         return context
 
-class ForProvidersView(ProviderPortalAuthMixin, TemplateView):
+class ForProvidersView(TemplateView):
     template_name = 'musicspace_app/for_providers.html'
+
+class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
+
+    template_name = 'musicspace_app/provider_profile.html'
+
+    def get_provider(self) -> Provider:
+        return self.request.user.provider
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['provider'] = self.get_provider()
+        return context
+
 
 class AboutUsView(TemplateView):
     template_name = 'musicspace_app/about_us.html'

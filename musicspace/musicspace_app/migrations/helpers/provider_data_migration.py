@@ -62,6 +62,7 @@ INSTRUMENTS = [
     ('cello', 'Cello'),
     ('trumpet', 'Trumpet'),
     ('saxophone', 'Saxophone'),
+    ('piano', 'Piano')
 ]
 
 male_given_names = [
