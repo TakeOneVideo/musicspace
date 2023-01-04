@@ -25,7 +25,20 @@
                         Either
                     </label>
                 </div>
-                <button type="submit">Submit</button>
+                <br/>
+                <p class="fs-5 fw-semibold">Genres</p>
+                <select class="form-select" name="genre" multiple>
+                    {% for genre in genres %}
+                    <option value="{{ genre.id }}" {% if genre.id in query_params.genre %} selected {% endif %}>{{ genre.display_text }}</option>
+                    {% endfor %}
+                </select>
+                <p class="fs-5 fw-semibold">Instruments</p>
+                <select class="form-select" name="instrument" multiple>
+                    {% for instrument in instruments %}
+                    <option value="{{ instrument.id }}" {% if instrument.id in query_params.instrument %} selected {% endif %}>{{ instrument.display_text }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary btn-lg provider-list-item-button">Submit</button>
             </form>
         </div>
         <div id="provider-search-results" class="col">

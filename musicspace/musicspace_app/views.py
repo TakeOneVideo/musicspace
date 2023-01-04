@@ -2,10 +2,10 @@ from typing import Any, Dict, List, Optional
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.urls import reverse
-from django.http import HttpResponseRedirect
-from musicspace_app.models import Provider
+from django.http import HttpResponseRedirect, QueryDict
+from musicspace_app.models import Provider, Genre, Instrument
 from django.core.paginator import Paginator 
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 import urllib.parse
 from enum import Enum
 
@@ -18,6 +18,8 @@ class Modality(str, Enum):
 @dataclass
 class QueryParameters:
     modality: Modality = Modality.EITHER
+    genre: List[str] = field(default_factory=list)
+    instrument: List[str] = field(default_factory=list)
 
 DEFAULT_PAGE_SIZE = 10
 class ProviderListView(TemplateView):
@@ -36,11 +38,12 @@ class ProviderListView(TemplateView):
 
     def _generate_query_params_from_input(
         self,
-        d: Dict
+        d: QueryDict
     ) -> QueryParameters:
-        print(d)
         return QueryParameters(
-            modality=d.get('modality')
+            modality=d.get('modality'),
+            genre=d.getlist('genre'),
+            instrument=d.getlist('instrument')
         )
 
     def _generate_url_from_query_params(
@@ -54,7 +57,7 @@ class ProviderListView(TemplateView):
         query_dict = {key: value for (key, value) in asdict(query_params).items() if value is not None} 
         if next_page_index:
             query_dict['page'] = next_page_index
-        query_string = urllib.parse.urlencode(query_dict)
+        query_string = urllib.parse.urlencode(query_dict, doseq=True)
         return "%s?%s" % (base_url, query_string)
 
     def get_queryset(
@@ -62,8 +65,6 @@ class ProviderListView(TemplateView):
         query_params: QueryParameters
     ):
         providers_queryset = Provider.objects.all()
-
-        print(query_params)
 
         if query_params.modality == Modality.IN_PERSON_ONLY:
             providers_queryset = providers_queryset.exclude(
@@ -75,6 +76,18 @@ class ProviderListView(TemplateView):
                 online=False
             )
 
+        ## if genres are selected, we want to include teachers that match ANY of the genres
+        if query_params.genre:
+            providers_queryset = providers_queryset.filter(
+                genres__in=query_params.genre
+            ).distinct()
+
+        if query_params.instrument:
+            providers_queryset = providers_queryset.filter(
+                instruments__in=query_params.instrument
+            ).distinct()
+                
+
         providers_queryset = providers_queryset.select_related('user', 'location')\
             .order_by('user__date_joined')
 
@@ -82,7 +95,7 @@ class ProviderListView(TemplateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
-        print(self.request.GET)
+        # print(self.request.GET)
         if not self.request.GET:
             query_params = QueryParameters()
         else:
@@ -90,7 +103,13 @@ class ProviderListView(TemplateView):
                 d=self.request.GET
             )
 
+        # print(query_params)
+        # print(type(query_params.genre))
+        # print(query_params.genre)
+
         context['query_params'] = query_params
+        context['genres'] = Genre.objects.all()
+        context['instruments'] = Instrument.objects.all()
 
         providers_queryset = self.get_queryset(query_params=query_params)
         paginator = Paginator(providers_queryset, DEFAULT_PAGE_SIZE)
@@ -114,7 +133,7 @@ class ProviderListView(TemplateView):
     ## extract form params, compute url and redirect
     def post(self, request, *args, **kwargs):
 
-        print(self.request.POST)
+        # print(self.request.POST)
         query_params = self._generate_query_params_from_input(
             d=self.request.POST
         )
