@@ -1,0 +1,11 @@
+{% extends 'musicspace_app/public_base.html' %}
+{% block content %}
+<div class="col-lg-4 offset-lg-4">
+  <h2>Log In</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Log In</button>
+  </form>
+</div>
+{% endblock %}

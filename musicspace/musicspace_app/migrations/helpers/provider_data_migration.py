@@ -1,6 +1,7 @@
 import random
 from datetime import datetime
 from django.utils import timezone
+from django.contrib.auth.hashers import make_password
 import lorem
 from typing import List, Tuple, Optional
 from pydantic import BaseModel
@@ -129,7 +130,7 @@ INSTRUMENT_DISTRIBUTION = [
 ]
 
 PROVIDER_USER_PREFIX = 'provider_'
-DEFAULT_USER_PASSWORD = 'passwordabc123'
+DEFAULT_USER_PASSWORD = make_password('passwordabc123')
 
 locations = [
     PyAddress(

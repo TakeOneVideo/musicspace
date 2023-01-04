@@ -1,0 +1,7 @@
+{% extends 'musicspace_app/public_base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <p>You've been logged out!!</p>
+    <p>Go <a href="{% url 'musicspace:for-teachers' %}">here</a> to log back in.</p>
+</div>
+{% endblock %}

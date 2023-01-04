@@ -8,7 +8,39 @@ from django.core.paginator import Paginator
 from dataclasses import dataclass, asdict, field
 import urllib.parse
 from enum import Enum
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, AccessMixin
+from django.contrib.auth import logout
+from django.contrib import messages
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect
 
+class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
+    login_url = 'musicspace:login'
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.provider != None
+
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        ## add a message
+        messages.error(self.request, 'You must be a teacher to access this page')
+        ## log the user out and let them try again
+        logout(self.request)
+        return super().handle_no_permission()
+
+class ProviderLoginView(LoginView):
+    template_name = 'musicspace_app/login.html'
+    next_page = 'musicspace:for-teachers'
+
+    def get(self, request, *args, **kwargs):
+        redirect_url = self.request.GET.get(self.redirect_field_name, '')
+        if redirect_url:
+            return super().get(request, *args, **kwargs)
+        else:
+            current_page = reverse('musicspace:login')
+            next_page = reverse(self.next_page)
+            return redirect(f'{current_page}?{self.redirect_field_name}={next_page}')
+
+class ProviderLogoutView(LogoutView):
+    template_name = 'musicspace_app/logged_out.html'
 
 class Modality(str, Enum):
     IN_PERSON_ONLY = 'in_person_only'
@@ -153,7 +185,7 @@ class ProviderDetailView(TemplateView):
         context['provider'] = self.get_provider()
         return context
 
-class ForProvidersView(TemplateView):
+class ForProvidersView(ProviderPortalAuthMixin, TemplateView):
     template_name = 'musicspace_app/for_providers.html'
 
 class AboutUsView(TemplateView):
