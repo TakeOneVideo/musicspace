@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_htmx %}
 <!DOCTYPE html>
 <html>
 
@@ -38,11 +39,10 @@
         crossorigin="anonymous">
     </script>
 
-    <script 
-        src="https://unpkg.com/htmx.org@1.7.0" 
-        integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" 
-        crossorigin="anonymous">
-    </script>
+    <script src="{% static 'js/htmx/htmx.min.js' %}" defer></script>
+    <script src="{% static 'js/htmx/debug.js' %}" defer></script>
+    {% django_htmx_script %}
+    {{ django_htmx_script }}
 
     {% block extra_scripts %} 
     {% endblock %}

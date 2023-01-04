@@ -25,3 +25,5 @@ httpx
 pydantic
 
 python-lorem
+
+django-htmx
