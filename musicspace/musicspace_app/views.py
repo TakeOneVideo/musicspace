@@ -15,6 +15,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView
 from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm
+from django.db import transaction
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:provider-login'
@@ -200,18 +201,26 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         provider = self.get_provider()
-        # context['provider'] = self.get_provider()
         context['address_form'] = AddressForm(instance=provider.location)
         context['provider_form'] = ProviderForm(instance=provider)
         context['user_form'] = MusicspaceUserForm(instance=provider.user)
         return context
 
     def post(self, request, *args, **kwargs):
-        print(f'got post')
-        print(self.request.POST)
+        provider = self.get_provider()
+        address_form = AddressForm(self.request.POST, instance=provider.location)
+        provider_form = ProviderForm(self.request.POST, instance=provider)
+        user_form = MusicspaceUserForm(self.request.POST, instance=provider.user)
 
-        return HttpResponseRedirect(self.request.path)
-
+        if address_form.is_valid() and provider_form.is_valid() and user_form.is_valid():
+            with transaction.atomic():
+                address_form.save()
+                provider_form.save()
+                user_form.save()
+                return HttpResponseRedirect(self.request.path)
+        else:
+            context = self.get_context_data(**kwargs)
+            return self.render_to_response(context)
 
 
 class AboutUsView(TemplateView):
