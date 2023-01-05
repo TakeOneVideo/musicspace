@@ -16,7 +16,7 @@ from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
-    login_url = 'musicspace:login'
+    login_url = 'musicspace:provider-login'
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.provider != None
 

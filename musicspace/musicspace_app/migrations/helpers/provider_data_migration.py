@@ -43,7 +43,7 @@ class PyGender(str, Enum):
     NONBINARY = 'nonbinary'
     OTHER = 'other'
 
-NUMBER_OF_PROVIDERS_TO_ADD = 1000
+NUMBER_OF_PROVIDERS_TO_ADD = 1716
 
 GENRES = [
     ('classical', 'Classical'),
@@ -103,7 +103,7 @@ family_names = [
 ]
 
 titles = [
-    'NAFME Certified Music Provider'
+    'NAFME Certified Music Teacher'
 ]
 
 male_image_urls = [
@@ -130,7 +130,7 @@ INSTRUMENT_DISTRIBUTION = [
     3
 ]
 
-PROVIDER_USER_PREFIX = 'provider_'
+PROVIDER_USER_PREFIX = 'teacher_'
 DEFAULT_USER_PASSWORD = make_password('passwordabc123')
 
 locations = [

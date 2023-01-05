@@ -38,7 +38,7 @@
                     <option value="{{ instrument.id }}" {% if instrument.id in query_params.instrument %} selected {% endif %}>{{ instrument.display_text }}</option>
                     {% endfor %}
                 </select>
-                <button type="submit" class="btn btn-primary btn-lg provider-list-item-button">Submit</button>
+                <button type="submit" class="btn btn-primary btn-lg provider-list-item-button fw-bold">Submit</button>
             </form>
         </div>
         <div id="provider-search-results" class="col">
