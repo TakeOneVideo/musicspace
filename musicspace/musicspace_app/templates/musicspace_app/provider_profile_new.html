@@ -1,0 +1,131 @@
+{% extends 'musicspace_app/public_base.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+
+                {{ user_form.non_field_errors }}
+                <div class="row">
+                    <div class="col form-outline mb-3">
+                        <label for="{{ user_form.first_name.id_for_label }}">First Name:</label>
+                        {{ user_form.first_name }}
+                        {{ user_form.first_name.errors }}
+                    </div>
+                    <div class="col form-outline mb-3">
+                        <label for="{{ user_form.last_name.id_for_label }}">Last Name:</label>
+                        {{ user_form.last_name }}
+                        {{ user_form.last_name.errors }}
+                    </div>
+                </div>
+                
+                {{ provider_form.non_field_errors }}
+                <div class="row">
+                    <div class="col form-outline mb-3">
+                        <label for="{{ provider_form.image_url.id_for_label }}">Image URL: </label>
+                        <input type="text" name="image_url" value="{{ provider_form.image_url.value }}" class="form-control" required="" id="{{ provider_form.image_url.id_for_label }}">
+                        {{ provider_form.image_url.errors }}
+                    </div>
+                    <div class="col-auto">
+                        <img id="profileImage" class="provider-list-item-image" src="{{ provider_form.image_url.value }}"> 
+                    </div>
+                </div>
+
+                <div class="form-outline mb-3">
+                    <label for="{{ provider_form.title.id_for_label }}">Title:</label>
+                    {{ provider_form.title }}
+                    {{ provider_form.title.errors }}
+                </div>
+
+                <div class="form-outline mb-3">
+                    <label for="{{ provider_form.text.id_for_label }}">Text: </label>
+                    {{ provider_form.text }}
+                    {{ provider_form.text.errors }}
+                </div>
+
+                <div class="row">
+                    <div class="col form-outline mb-3">
+                        <label for="{{ provider_form.genres.id_for_label }}">Genres:</label>
+                        {{ provider_form.genres }}
+                        {{ provider_form.genres.errors }}
+                    </div>
+                    <div class="col form-outline mb-3">
+                        <label for="{{ provider_form.instruments.id_for_label }}">Instruments:</label>
+                        {{ provider_form.instruments }}
+                        {{ provider_form.instruments.errors }}
+                    </div>
+                </div>
+
+                <p class="">Teaching Modalities</p>
+                <div class="form-check">
+                    {{ provider_form.in_person }}
+                    <label class="form-check-label" for="{{ provider_form.in_person.id_for_label }}">
+                      In Person
+                    </label>
+                </div>
+                <div class="form-check">
+                    {{ provider_form.online }}
+                    <label class="form-check-label" for="{{ provider_form.online.id_for_label }}">
+                      Online
+                    </label>
+                </div>
+
+                {{ address_form.non_field_errors }}
+                <div class="form-outline mb-3">
+                    <label for="{{ address_form.street_1.id_for_label }}">Street 1:</label>
+                    {{ address_form.street_1 }}
+                    {{ address_form.street_1.errors }}
+                </div>
+                <div class="form-outline mb-3">
+                    <label for="{{ address_form.street_2.id_for_label }}">Street 2:</label>
+                    {{ address_form.street_2 }}
+                    {{ address_form.street_2.errors }}
+                </div>
+
+                <div class="row">
+                    <div class="col-4 form-outline mb-3">
+                        <label for="{{ address_form.city.id_for_label }}">City:</label>
+                        {{ address_form.city }}
+                        {{ address_form.city.errors }}
+                    </div>
+                    <div class="col-2 form-outline mb-3">
+                        <label for="{{ address_form.state.id_for_label }}">State:</label>
+                        {{ address_form.state }}
+                        {{ address_form.state.errors }}
+                    </div>
+                    <div class="col-2 form-outline mb-3">
+                        <label for="{{ address_form.zip.id_for_label }}">Zip:</label>
+                        {{ address_form.zip }}
+                        {{ address_form.zip.errors }}
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>
+{% endblock %}
+{% block extra_scripts %} 
+<script>
+    function setupProfileImageUpdater() {
+        const profileImage = document.getElementById("profileImage");
+        console.log(profileImage)
+        const profileImageUrlInput = document.getElementById("{{ provider_form.image_url.id_for_label }}");
+        console.log(profileImageUrlInput)
+        profileImageUrlInput.onchange = function() {
+            console.log("changed")
+            console.log(this)
+            profileImage.src = this.value;
+        }
+    }
+
+    window.addEventListener("load", function(){
+        setupProfileImageUpdater()
+    });
+    
+</script>
+{% endblock %}

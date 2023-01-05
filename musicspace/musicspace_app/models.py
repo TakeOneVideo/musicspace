@@ -63,6 +63,9 @@ class Genre(models.Model):
         max_length=64
     )
 
+    def __str__(self):
+        return self.display_text
+        
 class Instrument(models.Model):
     id = models.CharField(
         max_length=32,
@@ -72,6 +75,9 @@ class Instrument(models.Model):
     display_text = models.CharField(
         max_length=64
     )
+    
+    def __str__(self):
+        return self.display_text
 
 class Provider(models.Model):
 

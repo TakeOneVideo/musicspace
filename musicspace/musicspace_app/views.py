@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView
+from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:provider-login'
@@ -191,15 +192,26 @@ class ForProvidersView(TemplateView):
 
 class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
 
-    template_name = 'musicspace_app/provider_profile.html'
+    template_name = 'musicspace_app/provider_profile_new.html'
 
     def get_provider(self) -> Provider:
         return self.request.user.provider
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['provider'] = self.get_provider()
+        provider = self.get_provider()
+        # context['provider'] = self.get_provider()
+        context['address_form'] = AddressForm(instance=provider.location)
+        context['provider_form'] = ProviderForm(instance=provider)
+        context['user_form'] = MusicspaceUserForm(instance=provider.user)
         return context
+
+    def post(self, request, *args, **kwargs):
+        print(f'got post')
+        print(self.request.POST)
+
+        return HttpResponseRedirect(self.request.path)
+
 
 
 class AboutUsView(TemplateView):
