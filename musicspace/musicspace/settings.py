@@ -156,3 +156,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 AUTH_USER_MODEL = 'musicspace_app.MusicspaceUser'
+
+PROVIDER_USER_PREFIX = config('PROVIDER_USER_PREFIX', default='provider_')
+PROVIDER_EMAIL_PREFIX = config('PROVIDER_EMAIL_PREFIX', default='test')
+PROVIDER_EMAIL_DOMAIN = config('PROVIDER_EMAIL_DOMAIN', default='example.com')

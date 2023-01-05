@@ -6,6 +6,7 @@ import lorem
 from typing import List, Tuple, Optional
 from pydantic import BaseModel
 from enum import Enum
+from django.conf import settings
 
 
 class PyAddress(BaseModel):
@@ -130,7 +131,6 @@ INSTRUMENT_DISTRIBUTION = [
     3
 ]
 
-PROVIDER_USER_PREFIX = 'teacher_'
 DEFAULT_USER_PASSWORD = make_password('passwordabc123')
 
 locations = [
@@ -208,7 +208,10 @@ def generate_instruments() -> List[str]:
     return random.sample([pair[0] for pair in INSTRUMENTS], k=count)
 
 def generate_username(index: int) -> str:
-    return f'{PROVIDER_USER_PREFIX}{index}'
+    return f'{settings.PROVIDER_USER_PREFIX}{index}'
+
+def generate_email(username: str) -> str:
+    return f'{settings.PROVIDER_EMAIL_PREFIX}+{username}@{settings.PROVIDER_EMAIL_DOMAIN}'
 
 def generate_in_person_online() -> Tuple[bool, bool]:
     in_person_value = random.random()
@@ -265,6 +268,7 @@ def insert_providers(apps, schema_editor):
 
     for i in range(NUMBER_OF_PROVIDERS_TO_ADD):
         username = generate_username(index=i)
+        email = generate_email(username=username)
         gender = generate_random_gender()
         name = generate_random_name(gender=gender)
         title = generate_random_title()
@@ -280,6 +284,7 @@ def insert_providers(apps, schema_editor):
         try:
             user = MusicspaceUser.objects.create(
                 username=username,
+                email=email,
                 password=DEFAULT_USER_PASSWORD,
                 first_name=name.given_name,
                 last_name=name.family_name,
