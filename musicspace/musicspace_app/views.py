@@ -226,5 +226,8 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
 class AboutUsView(TemplateView):
     template_name = 'musicspace_app/about_us.html'
 
+# class IndexView(TemplateView):
+#     template_name = 'musicspace_app/index.html'
+
 class IndexView(ProviderListView):
     pass
