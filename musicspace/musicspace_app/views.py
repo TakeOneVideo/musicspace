@@ -193,7 +193,7 @@ class ForProvidersView(TemplateView):
 
 class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
 
-    template_name = 'musicspace_app/provider_profile_new.html'
+    template_name = 'musicspace_app/provider_profile.html'
 
     def get_provider(self) -> Provider:
         return self.request.user.provider
