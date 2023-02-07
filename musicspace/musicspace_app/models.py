@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 from typing import Optional, Any
 import uuid
@@ -140,3 +141,57 @@ class Provider(models.Model):
             return self.text[:100] + '...' 
         else:
             return self.text
+
+    ## returns Optional[TakeOneUser]
+    @property
+    def takeone_user(self):
+        try:
+            return self.takeone_user_opt
+        except ObjectDoesNotExist:
+            return None
+
+class TakeOneUser(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    provider = models.OneToOneField(
+        Provider, 
+        related_name='takeone_user_opt',
+        on_delete=models.PROTECT
+    )
+
+    takeone_id = models.CharField(
+        max_length=64,
+        editable=False
+    )
+
+    active = models.BooleanField(default=True)
+
+    created_date_time = models.DateTimeField(auto_now_add=True)
+    modified_date_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_date_time']
+
+class TakeOneProject(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    takeone_user = models.ForeignKey(
+        TakeOneUser, 
+        related_name='projects',
+        on_delete=models.PROTECT
+    )
+
+    status = models.CharField(
+        max_length=64
+    )
+
+    published = models.BooleanField(default=False)
+    show_video = models.BooleanField(default=False)
+
+    created_date_time = models.DateTimeField(auto_now_add=True)
+    modified_date_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_date_time']

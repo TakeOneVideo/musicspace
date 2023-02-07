@@ -58,3 +58,6 @@ class ProviderForm(forms.ModelForm):
             'genres', 'instruments',
             'in_person', 'online'
         ]
+
+class EmptyForm(forms.Form):
+    pass

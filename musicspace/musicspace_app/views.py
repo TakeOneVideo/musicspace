@@ -2,7 +2,7 @@ from typing import Any, Dict, List, Optional
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.urls import reverse
-from django.http import HttpResponseRedirect, QueryDict
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
 from musicspace_app.models import Provider, Genre, Instrument
 from django.core.paginator import Paginator 
 from dataclasses import dataclass, asdict, field
@@ -13,9 +13,13 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
-from django.views.generic.edit import UpdateView
-from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm
+from django.views.generic.edit import UpdateView, FormView
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
+from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm, EmptyForm
 from django.db import transaction
+from musicspace_app.domain import use_case_factory
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:provider-login'
@@ -28,6 +32,11 @@ class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
         ## log the user out and let them try again
         logout(self.request)
         return super().handle_no_permission()
+
+class ProviderPortalComponentAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
+    raise_exception = True
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.provider != None
 
 class ProviderLoginView(LoginView):
     template_name = 'musicspace_app/login.html'
@@ -204,6 +213,20 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
         context['address_form'] = AddressForm(instance=provider.location)
         context['provider_form'] = ProviderForm(instance=provider)
         context['user_form'] = MusicspaceUserForm(instance=provider.user)
+        
+        takeone_user = provider.takeone_user
+        print(takeone_user)
+        if takeone_user:
+            takeone_project = takeone_user.projects.last()
+        else:
+            takeone_project = None
+
+        print(takeone_project)
+
+        ## TODO - show project status and possibly show published video here
+        if takeone_project:
+            context['takeone_project'] = takeone_project
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -222,6 +245,39 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
             context = self.get_context_data(**kwargs)
             return self.render_to_response(context)
 
+class AddVideoView(ProviderPortalComponentAuthMixin, FormView):
+    template_name = None
+    form_class = EmptyForm
+
+    def get_provider(self) -> Provider:
+        return self.request.user.provider
+
+    def form_valid(self, form):
+
+        provider = self.get_provider()
+        ## this needs to create a user and a project
+        takeone_user = provider.takeone_user
+        if not takeone_user:
+            takeone_user_use_case = use_case_factory.takeone_user_use_case()
+            takeone_user = takeone_user_use_case.create_user(
+                provider=provider
+            )
+
+        takeone_project_use_case = use_case_factory.takeone_project_use_case()
+        takeone_project = takeone_project_use_case.create_project(
+            takeone_user=takeone_user
+        )
+
+        response = HttpResponse()
+        response["HX-Refresh"] = "true"
+
+        return response
+
+    def form_invalid(self, form) -> HttpResponse:
+        return HttpResponseBadRequest()
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        return self.http_method_not_allowed(request, *args, **kwargs)
 
 class AboutUsView(TemplateView):
     template_name = 'musicspace_app/about_us.html'
@@ -231,3 +287,10 @@ class AboutUsView(TemplateView):
 
 class IndexView(ProviderListView):
     pass
+
+class TakeOneWebhookView(APIView):
+
+    def post(self, request, *args,  **kwargs):
+        
+        print(request.data)
+        return Response({}, status=status.HTTP_200_OK)

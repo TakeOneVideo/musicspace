@@ -4,9 +4,11 @@
 <div class="container-xxl py-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form method="post">
+            <form id="addVideoForm" hx-post="{% url 'musicspace:provider-add-video' %}" hx-swap="none">
                 {% csrf_token %}
-
+            </form>
+            <form id="updateForm" action="{% url 'musicspace:provider-profile' %}" method="post">
+                {% csrf_token %}
                 {{ user_form.non_field_errors }}
                 <div class="row">
                     <div class="col form-outline mb-3">
@@ -36,6 +38,17 @@
                     <div class="col-auto">
                         <img id="profileImage" class="provider-list-item-image" src="{{ provider_form.image_url.value }}"> 
                     </div>
+                </div>
+                <div class="row">
+                    {% if takeone_project %}
+                    <div class="col form-outline d-grid my-3">
+                        <p>Video Status: {{takeone_project.status}}</p>
+                    </div>
+                    {% else %}
+                    <div class="col form-outline d-grid my-3">
+                        <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit" form="addVideoForm">Add Video</button>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="form-outline mb-3">
@@ -106,10 +119,10 @@
                         {{ address_form.zip.errors }}
                     </div>
                 </div>
-                <div class="d-grid">
-                    <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit">Update Profile</button>
-                </div>
-            </form>
+            </form>                
+            <div class="d-grid">
+                <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit" form="updateForm">Update Profile</button>
+            </div>
         </div>
     </div> 
 </div>
