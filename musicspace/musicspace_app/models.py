@@ -175,8 +175,12 @@ class TakeOneUser(models.Model):
 
 class TakeOneProject(models.Model):
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    
+    id = models.CharField(
+        primary_key=True,
+        max_length=64,
+        editable=False
+    )
+
     takeone_user = models.ForeignKey(
         TakeOneUser, 
         related_name='projects',

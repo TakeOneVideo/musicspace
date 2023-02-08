@@ -20,6 +20,7 @@ from rest_framework.response import Response
 from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm, EmptyForm
 from django.db import transaction
 from musicspace_app.domain import use_case_factory
+import json
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:provider-login'
@@ -291,6 +292,17 @@ class IndexView(ProviderListView):
 class TakeOneWebhookView(APIView):
 
     def post(self, request, *args,  **kwargs):
-        
-        print(request.data)
+
+        print(json.dumps(request.data))
+        if 'project' in request.data:
+
+            takeone_project_use_case = use_case_factory.takeone_project_use_case()
+            try:
+                takeone_project_use_case.handle_project_notification(
+                    project_data=request.data['project']
+                )
+            except BaseException as e:
+                print('got exception')
+                print(e)
+
         return Response({}, status=status.HTTP_200_OK)
