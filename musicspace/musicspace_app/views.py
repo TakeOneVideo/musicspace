@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
-from musicspace_app.models import Provider, Genre, Instrument
+from musicspace_app.models import Provider, Genre, Instrument, TakeOneProject
 from django.core.paginator import Paginator 
 from dataclasses import dataclass, asdict, field
 import urllib.parse
@@ -193,9 +193,19 @@ class ProviderDetailView(TemplateView):
     def get_provider(self) -> Provider:
         return get_object_or_404(Provider.objects.select_related('user', 'location'), id=self.kwargs['provider_id'])
 
+    def get_takeone_project(self, provider) -> Optional[TakeOneProject]:
+        takeone_user = provider.takeone_user
+        if takeone_user:
+            return takeone_user.projects.last()
+        else:
+            return None
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['provider'] = self.get_provider()
+        provider = self.get_provider()
+        context['provider'] = provider
+        context['takeone_project'] = self.get_takeone_project(provider)
+
         return context
 
 class ForProvidersView(TemplateView):
@@ -208,6 +218,13 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
     def get_provider(self) -> Provider:
         return self.request.user.provider
 
+    def get_takeone_project(self, provider) -> Optional[TakeOneProject]:
+        takeone_user = provider.takeone_user
+        if takeone_user:
+            return takeone_user.projects.last()
+        else:
+            return None
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         provider = self.get_provider()
@@ -215,18 +232,17 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
         context['provider_form'] = ProviderForm(instance=provider)
         context['user_form'] = MusicspaceUserForm(instance=provider.user)
         
-        takeone_user = provider.takeone_user
-        print(takeone_user)
-        if takeone_user:
-            takeone_project = takeone_user.projects.last()
-        else:
-            takeone_project = None
-
-        print(takeone_project)
+        takeone_project = self.get_takeone_project(provider=provider)
 
         ## TODO - show project status and possibly show published video here
         if takeone_project:
             context['takeone_project'] = takeone_project
+            ## TODO - remove this
+            if takeone_project.status == 'recording':
+                takeone_user_use_case = use_case_factory.takeone_user_use_case()
+                context['auth_code'] = takeone_user_use_case.get_auth_code(
+                    user=provider.takeone_user
+                )
 
         return context
 

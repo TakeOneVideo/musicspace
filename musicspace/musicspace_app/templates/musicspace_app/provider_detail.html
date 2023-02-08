@@ -35,6 +35,15 @@
             <div class="row">
                 <p class="fs-5 fw-normal lh-sm m-1 ">{{ provider.text }}</p>
             </div>
+            {% if takeone_project and takeone_project.should_render_video %}
+            <div class="row">
+                <take-one-video
+                    client-id="{{ TAKEONE_PUBLIC_CLIENT_ID }}" 
+                    video-id="{{ takeone_project.id }}"
+                    base-url="{{ TAKEONE_PUBLIC_BASE_URL }}"
+                ></take-one-video>
+            </div>
+            {% endif %}
         </div>
         <div class="col-3">
             <div class="row">

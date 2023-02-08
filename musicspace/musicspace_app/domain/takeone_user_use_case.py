@@ -44,5 +44,13 @@ class TakeOneUserUseCase:
 
         return takeone_user
 
+    def get_auth_code(
+        self,
+        user: TakeOneUser
+    ) -> str:
+        return self.takeone_client.authorize(
+            user_id=user.takeone_id
+        )
+
 
 

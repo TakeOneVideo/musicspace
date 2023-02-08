@@ -42,11 +42,23 @@
                 <div class="row">
                     {% if takeone_project %}
                     <div class="col form-outline d-grid my-3">
-                        <p>Video Status: {{takeone_project.status}}</p>
+                        <p>Project Status: {{takeone_project.status}}</p>
+                        <p>Project ID: {{ takeone_project.id }}</p>
+                        {%if auth_code %}
+                        <p>Auth Code: {{ auth_code}} </p>
+                        {% endif %}
+                        {% if takeone_project.should_render_video %}
+                        <take-one-video 
+                            class="t1video"
+                            client-id="{{ TAKEONE_PUBLIC_CLIENT_ID }}" 
+                            video-id="{{ takeone_project.id }}"
+                            base-url="{{ TAKEONE_PUBLIC_BASE_URL }}"
+                        ></take-one-video>
+                        {% endif %}
                     </div>
                     {% else %}
                     <div class="col form-outline d-grid my-3">
-                        <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit" form="addVideoForm">Add Video</button>
+                        <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit" form="addVideoForm">Create a profile video with TakeOne</button>
                     </div>
                     {% endif %}
                 </div>

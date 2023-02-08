@@ -37,6 +37,12 @@ class TakeOneClient:
         # hotlinking_protection_enabled: bool = False
         # allowed_origins: List[str]
 
+    class AuthorizationCodeRequest(BaseModel):
+        user: str
+
+    class AuthorizationCodeResponse(BaseModel):
+        code: str
+
     def __init__(
         self,
         base_url: str,
@@ -84,4 +90,29 @@ class TakeOneClient:
         response_body = r.json()
         return self.Project(**response_body)
 
+    def authorize(
+        self,
+        user_id: str
+    ) -> str:
+
+        request = self.AuthorizationCodeRequest(
+            user=user_id
+        )
+
+        url = f'{self.base_url}/authorize'
+        r = httpx.post(
+            url, 
+            json=request.dict(),
+            auth=self.auth, 
+            timeout=30
+        )
+
+        if r.status_code == 400:
+            response_body = r.json()
+            print(response_body)
+
+        r.raise_for_status()
+        response_body = r.json()
+        auth_code_response = self.AuthorizationCodeResponse(**response_body)
+        return auth_code_response.code
 

@@ -1,4 +1,4 @@
-from django.conf import settings
+from musicspace_app import settings
 from .data import TakeOneClient
 
 takeone_client = TakeOneClient(

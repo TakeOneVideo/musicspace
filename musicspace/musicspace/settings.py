@@ -74,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'musicspace_app.context_processors.takeone_public_video_config_processor'
             ],
         },
     },
@@ -164,3 +165,6 @@ PROVIDER_EMAIL_DOMAIN = config('PROVIDER_EMAIL_DOMAIN', default='example.com')
 TAKEONE_BASE_URL = config('TAKEONE_BASE_URL')
 TAKEONE_CLIENT_ID = config('TAKEONE_CLIENT_ID')
 TAKEONE_CLIENT_SECRET = config('TAKEONE_CLIENT_SECRET')
+
+TAKEONE_PUBLIC_BASE_URL = config('TAKEONE_PUBLIC_BASE_URL')
+TAKEONE_PUBLIC_CLIENT_ID = config('TAKEONE_PUBLIC_CLIENT_ID')

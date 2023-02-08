@@ -197,5 +197,10 @@ class TakeOneProject(models.Model):
     created_date_time = models.DateTimeField(auto_now_add=True)
     modified_date_time = models.DateTimeField(auto_now=True)
 
+    @property
+    def should_render_video(self) -> bool:
+        return self.status == 'completed' and \
+            self.published and self.show_video
+
     class Meta:
         ordering = ['created_date_time']

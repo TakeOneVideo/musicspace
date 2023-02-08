@@ -9,7 +9,6 @@ class TakeOneVideo extends HTMLElement {
         this.takeOneBaseURL = this.getAttribute('base-url');
         this.clientId = this.getAttribute('client-id');
         this.videoId = this.getAttribute('video-id');
-
     }
 
     static get observedAttributes() { return ['client-id', 'video-id', 'base-url']; }
@@ -20,6 +19,7 @@ class TakeOneVideo extends HTMLElement {
         video.setAttribute('preload', 'auto');
         this.appendChild(video);
         this.player = videojs(video);
+        this.player.fill(true);
         let qualityLevels = this.player.qualityLevels();
         qualityLevels.on('addqualitylevel', function(event) {
             let qualityLevel = event.qualityLevel;
@@ -55,6 +55,18 @@ class TakeOneVideo extends HTMLElement {
         }
     }
 
+    getAspectRatio(videoFormat) {
+        if (videoFormat == "landscape") {
+            return "16:9"
+        }
+        else if (videoFormat == "portrait") {
+            return "9:16"
+        }
+        else {
+            return "1:1"
+        }
+    }
+
     fetchVideoURL() {
         if (this.clientId && this.videoId && this.takeOneBaseURL && this.player) {
             const comp = this
@@ -62,10 +74,12 @@ class TakeOneVideo extends HTMLElement {
             fetch(requestURL).then(function(response) {
                 return response.json();
             }).then(function(responseJSON) {
-                const src = responseJSON.src
-                const type = responseJSON.type
+                const src = responseJSON.src;
+                const type = responseJSON.type;
+                const videoFormat = responseJSON.video_format;
                 if (comp.videoURL != src) {
                     comp.videoURL = src
+                    comp.player.aspectRatio(comp.getAspectRatio(videoFormat));
                     comp.player.src({
                         src: src,
                         type: type
