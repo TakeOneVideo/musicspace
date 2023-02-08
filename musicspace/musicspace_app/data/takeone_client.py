@@ -65,6 +65,10 @@ class TakeOneClient:
             timeout=30
         )
 
+        if r.status_code >= 400:
+            response_body = r.json()
+            print(response_body)
+
         r.raise_for_status()
         response_body = r.json()
         return self.User(**response_body)

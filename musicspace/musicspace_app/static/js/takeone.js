@@ -39,7 +39,6 @@ class TakeOneVideo extends HTMLElement {
 
     attributeChangedCallback(attrName, oldValue, newValue) {
         if (this.isConnected) {
-            console.log(`TakeOneVideo ${attrName} attribute changed from ${oldValue} to ${newValue}`);
             if (attrName == 'client-id') {
                 this.clientId = newValue;
                 this.fetchVideoURL();
