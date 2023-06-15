@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    :root {
+        --background-color: #FBF8FF;
+        --primary-color: #8C2D99;
+        --secondary-color: #DF3DB6;
+    }
+    body {
+        background-color: var(--background-color);
+    }
+    * { font-family: "Avenir Next"; }
+    .header { padding: 15px; margin: 0px;}
+    .subheader { align-items: center; padding: 20px;}
+    .subheader-text { font-size: xx-large; color: var(--primary-color); text-align: center; margin: 0px; }
+    .logo { height: 56px; width: 346px; }
+    .container { padding: 40px; }
+    body { margin: 0px;}
+    p { font-size: large; }
+    .view-video-button {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--background-color);
+        background-color: var(--secondary-color);
+        border-color: var(--primary-color);
+        border-radius: 6px;
+        outline: none;
+    }
+</style>
+</head>
+<body>
+
+  <div class="subheader">
+    <p class="subheader-text">Your TakeOne Video Invitation</p>
+  </div>
+
+  <div class="container">
+    <p>Hi {{ recipient_description }},</p>
+    <p>Congrats! Here's your code to start recording your TakeOne Video!</p>
+
+    {% comment %}
+    In the future, this would be the full invitation deep link, not just the code
+    {% endcomment %}
+    <p>{{ code }}</p>
+
+    <p>
+    Sincerely,</br>
+    Your friends at TakeOne
+    </p>
+  </div>
+
+</body>
+</html>

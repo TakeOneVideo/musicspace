@@ -73,7 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
@@ -160,3 +160,12 @@ AUTH_USER_MODEL = 'musicspace_app.MusicspaceUser'
 PROVIDER_USER_PREFIX = config('PROVIDER_USER_PREFIX', default='provider_')
 PROVIDER_EMAIL_PREFIX = config('PROVIDER_EMAIL_PREFIX', default='test')
 PROVIDER_EMAIL_DOMAIN = config('PROVIDER_EMAIL_DOMAIN', default='example.com')
+
+TAKEONE_BASE_URL = config('TAKEONE_BASE_URL')
+TAKEONE_CLIENT_ID = config('TAKEONE_CLIENT_ID')
+TAKEONE_CLIENT_SECRET = config('TAKEONE_CLIENT_SECRET')
+TAKEONE_VIDEO_CONTAINER_TEMPLATE_ID = config('TAKEONE_VIDEO_CONTAINER_TEMPLATE_ID')
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/emails'
+FROM_EMAIL = config('FROM_EMAIL', default='test@example.com')

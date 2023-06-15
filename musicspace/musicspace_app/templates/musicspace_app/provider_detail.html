@@ -35,6 +35,27 @@
             <div class="row">
                 <p class="fs-5 fw-normal lh-sm m-1 ">{{ provider.text }}</p>
             </div>
+            {% if takeone_profile_video_container and takeone_profile_video_container.should_render_video %}
+            <div class="row">
+                <video
+                    id="my-player"
+                    class="video-js"
+                    controls
+                    preload="auto"
+                    width="640"
+                    height="360"
+                    data-setup='{}'>
+                    <source src="{{ takeone_profile_video_container.video_stream.src }}" type="{{ takeone_profile_video_container.video_stream.type }}"></source>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">
+                        supports HTML5 video
+                        </a>
+                    </p>
+                </video>
+            </div>
+            {% endif %}
         </div>
         <div class="col-3">
             <div class="row">

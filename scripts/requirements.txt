@@ -1,0 +1,4 @@
+httpx
+pydantic
+## requires that ffmpeg be installed on the host
+ffmpeg-python

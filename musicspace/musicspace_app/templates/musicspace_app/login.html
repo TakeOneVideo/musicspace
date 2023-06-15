@@ -1,4 +1,5 @@
 {% extends 'musicspace_app/public_base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -17,7 +18,7 @@
               <label for="id_password">Password</label>
             </div>
             <div class="d-grid">
-              <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit">Sign In</button>
+              <button class="btn btn-primary btn-lg provider-list-item-button fw-bold" type="submit">{% translate 'Log in' %}</button>
             </div>
           </form>
         </div>

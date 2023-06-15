@@ -22,7 +22,7 @@ RUN cd ${APPLICATION_DIR}
 
 RUN pwd
 
-RUN wget https://dl.min.io/server/minio/release/linux-arm64/minio
+RUN wget https://dl.min.io/server/minio/release/linux-amd64/minio
 
 RUN cp minio ${APPLICATION_DIR}/minio
 

@@ -9,6 +9,9 @@ urlpatterns = [
     path('about-us', views.AboutUsView.as_view(), name='about-us'),
     path('teachers/<uuid:provider_id>', views.ProviderDetailView.as_view(), name='provider-detail'),
     path('for-teachers/profile', views.ProviderProfileView.as_view(), name='provider-profile'),
+    path('for-teachers/add-video', views.AddVideoView.as_view(), name='provider-add-video'),
+    path('for-teachers/resend-invitation', views.ResendInvitationView.as_view(), name='provider-resend-invitation'),
     path('for-teachers/login', views.ProviderLoginView.as_view(), name='provider-login'),
     path('for-teachers/logout', views.ProviderLogoutView.as_view(), name='provider-logout'),
+    path('takeone-webhook', views.TakeOneWebhookView.as_view(), name='takeone-webhook'),
 ]

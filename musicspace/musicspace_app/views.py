@@ -2,8 +2,8 @@ from typing import Any, Dict, List, Optional
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.urls import reverse
-from django.http import HttpResponseRedirect, QueryDict
-from musicspace_app.models import Provider, Genre, Instrument
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
+from musicspace_app.models import Provider, Genre, Instrument, TakeOneProfileVideoContainer
 from django.core.paginator import Paginator 
 from dataclasses import dataclass, asdict, field
 import urllib.parse
@@ -13,9 +13,16 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
-from django.views.generic.edit import UpdateView
-from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm
+from django.views.generic.edit import UpdateView, FormView
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
+from musicspace_app.forms import AddressForm, ProviderForm, MusicspaceUserForm, EmptyForm
 from django.db import transaction
+from musicspace_app.domain import use_case_factory
+import json
+from django.core.exceptions import ObjectDoesNotExist
+import musicspace_app.errors as app_errors
 
 class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
     login_url = 'musicspace:provider-login'
@@ -28,6 +35,11 @@ class ProviderPortalAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
         ## log the user out and let them try again
         logout(self.request)
         return super().handle_no_permission()
+
+class ProviderPortalComponentAuthMixin(UserPassesTestMixin, LoginRequiredMixin):
+    raise_exception = True
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.provider != None
 
 class ProviderLoginView(LoginView):
     template_name = 'musicspace_app/login.html'
@@ -183,9 +195,25 @@ class ProviderDetailView(TemplateView):
     def get_provider(self) -> Provider:
         return get_object_or_404(Provider.objects.select_related('user', 'location'), id=self.kwargs['provider_id'])
 
+    def get_takeone_profile_video_container(
+        self, 
+        provider: Provider
+    ) -> Optional[TakeOneProfileVideoContainer]:
+        try:
+            takeone_user = provider.takeone_user
+            if takeone_user:
+                return takeone_user.profile_video_container
+            else:
+                return None
+        except ObjectDoesNotExist:
+            return None
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['provider'] = self.get_provider()
+        provider = self.get_provider()
+        context['provider'] = provider
+        context['takeone_profile_video_container'] = self.get_takeone_profile_video_container(provider)
+
         return context
 
 class ForProvidersView(TemplateView):
@@ -193,10 +221,23 @@ class ForProvidersView(TemplateView):
 
 class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
 
-    template_name = 'musicspace_app/provider_profile_new.html'
+    template_name = 'musicspace_app/provider_profile.html'
 
     def get_provider(self) -> Provider:
         return self.request.user.provider
+
+    def get_takeone_profile_video_container(
+        self, 
+        provider: Provider
+    ) -> Optional[TakeOneProfileVideoContainer]:
+        try:
+            takeone_user = provider.takeone_user
+            if takeone_user:
+                return takeone_user.profile_video_container
+            else:
+                return None
+        except ObjectDoesNotExist:
+            return None
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -204,6 +245,19 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
         context['address_form'] = AddressForm(instance=provider.location)
         context['provider_form'] = ProviderForm(instance=provider)
         context['user_form'] = MusicspaceUserForm(instance=provider.user)
+        
+        takeone_profile_video_container = self.get_takeone_profile_video_container(provider=provider)
+
+        if takeone_profile_video_container:
+
+            ## NOTE - if webhooks are used, this refreshing from the server would be unnecessary
+            takeone_project_use_case = use_case_factory.takeone_project_use_case()
+            takeone_profile_video_container = takeone_project_use_case.update_video_container_from_server(
+                video_container=takeone_profile_video_container
+            )
+
+            context['takeone_profile_video_container'] = takeone_profile_video_container
+            
         return context
 
     def post(self, request, *args, **kwargs):
@@ -222,6 +276,82 @@ class ProviderProfileView(ProviderPortalAuthMixin, TemplateView):
             context = self.get_context_data(**kwargs)
             return self.render_to_response(context)
 
+class AddVideoView(ProviderPortalComponentAuthMixin, FormView):
+    template_name = None
+    form_class = EmptyForm
+
+    def get_provider(self) -> Provider:
+        return self.request.user.provider
+
+    def form_valid(self, form):
+
+        provider = self.get_provider()
+        ## this needs to create a user and a project
+        takeone_user_use_case = use_case_factory.takeone_user_use_case()
+        takeone_user = provider.takeone_user
+        if not takeone_user:
+            takeone_user = takeone_user_use_case.create_user(
+                provider=provider
+            )
+
+        takeone_project_use_case = use_case_factory.takeone_project_use_case()
+        ## create video container
+        profile_video_container = takeone_project_use_case.create_profile_video_container(
+            takeone_user=takeone_user
+        )
+
+        ## create the project
+        takeone_project = takeone_project_use_case.create_project(
+            takeone_user=takeone_user,
+            video_container=profile_video_container
+        )
+
+        ## send email to user
+        takeone_user_use_case.send_invitation_email(
+            takeone_user=takeone_user
+        )
+
+        response = HttpResponse()
+        response["HX-Refresh"] = "true"
+
+        return response
+
+    def form_invalid(self, form) -> HttpResponse:
+        return HttpResponseBadRequest()
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        return self.http_method_not_allowed(request, *args, **kwargs)
+    
+class ResendInvitationView(ProviderPortalComponentAuthMixin, FormView):
+    template_name = None
+    form_class = EmptyForm
+
+    def get_provider(self) -> Provider:
+        return self.request.user.provider
+
+    def form_valid(self, form):
+
+        provider = self.get_provider()
+        takeone_user = provider.takeone_user
+        if not takeone_user:
+            raise app_errors.BadRequestError()
+
+        ## send email to user
+        takeone_user_use_case = use_case_factory.takeone_user_use_case()
+        takeone_user_use_case.send_invitation_email(
+            takeone_user=takeone_user
+        )
+
+        response = HttpResponse()
+        response["HX-Refresh"] = "true"
+
+        return response
+
+    def form_invalid(self, form) -> HttpResponse:
+        return HttpResponseBadRequest()
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        return self.http_method_not_allowed(request, *args, **kwargs)
 
 class AboutUsView(TemplateView):
     template_name = 'musicspace_app/about_us.html'
@@ -231,3 +361,28 @@ class AboutUsView(TemplateView):
 
 class IndexView(ProviderListView):
     pass
+
+class TakeOneWebhookView(APIView):
+
+    def post(self, request, *args,  **kwargs):
+
+        print(json.dumps(request.data, indent=4))
+        takeone_project_use_case = use_case_factory.takeone_project_use_case()
+        try:
+            webhook_request = takeone_project_use_case.decode_webhook_request(
+                webhook_request_dict=request.data
+            )
+        except BaseException as e:
+            print('got exception')
+            print(e)
+            return Response({}, status=status.HTTP_200_OK)
+
+        try:
+            takeone_project_use_case.handle_webhook(
+                webhook_request=webhook_request
+            )
+        except BaseException as e:
+            print('got exception')
+            print(e)
+
+        return Response({}, status=status.HTTP_200_OK)

@@ -1,53 +1,24 @@
 version: '3.8'
 
-x-extra_hosts: &extra_hosts
-  extra_hosts:
-    - "musicspace-service:172.20.1.4"
-    - "musicspace-service-db:172.20.1.5"
-    - "musicspace-minio:172.20.1.6"
-
 services:
   musicspace-service:
-    image: takeone/musicspace-service:dev-latest-arm64
+    image: takeone/musicspace-service:dev-latest-amd64
     restart: unless-stopped
     entrypoint: ["/src/bin/entrypoint.sh"]
     command: ["sh", "/src/bin/command.sh"]
     build:
       context: ./musicspace
-      args:
-        PLATFORM: linux/arm64/v8
-        REQUIREMENTS_FILE: requirements.arm64.txt
     ports:
       - 3000:8000
     env_file:
       - dev.musicspace-service.env
+      - dev.musicspace-service.override.env
     volumes:
       - ./musicspace:/src
       - ./data/musicspace-service/emails:/tmp/emails
       - ./data/musicspace-service:/var/musicspace
     depends_on:
-      # - musicspace-service-db
       - musicspace-minio
-    <<: *extra_hosts
-    networks:
-      default:
-        ipv4_address: 172.20.1.4
-
-  # musicspace-service-db:
-  #   restart: unless-stopped
-  #   image: postgres:14
-  #   # ports:
-  #   #   - "5432:5432"
-  #   env_file:
-  #     - dev.db.env
-  #   volumes:
-  #     - ./data/musicspace-service-db:/var/lib/postgresql/data
-  #   cpus: 0.25
-  #   mem_limit: 512m
-  #   <<: *extra_hosts
-  #   networks:
-  #     default:
-  #       ipv4_address: 172.20.1.6
 
   musicspace-minio:
     restart: unless-stopped
@@ -55,8 +26,6 @@ services:
     command: ["sh", "/src/bin/command.sh"]
     build:
       context: ./minio
-      args:
-        PLATFORM: linux/arm64/v8
     environment:
       API_PORT: 3001
       CONSOLE_PORT: 3002
@@ -67,15 +36,3 @@ services:
     ports:
       - 3001:3001
       - 3002:3002
-    <<: *extra_hosts
-    networks:
-      default:
-        ipv4_address: 172.20.1.7
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.20.1.0/24"
