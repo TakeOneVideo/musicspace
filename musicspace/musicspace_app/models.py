@@ -1,9 +1,14 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 from typing import Optional, Any
 import uuid
-
 from django.contrib.auth.models import AbstractUser
+
+from musicspace_app.data import VideoStream
+from typing import List, Optional
+from pydantic import BaseModel
+from datetime import datetime
 
 class MusicspaceUser(AbstractUser):
 
@@ -140,3 +145,99 @@ class Provider(models.Model):
             return self.text[:100] + '...' 
         else:
             return self.text
+
+    @property
+    def takeone_user(self) -> Optional["TakeOneUser"]:
+        try:
+            return self.takeone_user_opt
+        except ObjectDoesNotExist:
+            return None
+
+class TakeOneUser(models.Model):
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    provider = models.OneToOneField(
+        Provider, 
+        related_name='takeone_user_opt',
+        on_delete=models.PROTECT
+    )
+
+    takeone_id = models.CharField(
+        max_length=64,
+        editable=False
+    )
+
+    active = models.BooleanField(default=True)
+
+    created_date_time = models.DateTimeField(auto_now_add=True)
+    modified_date_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_date_time']
+
+class TakeOneProfileVideoContainer(models.Model):
+
+    class VideoFormat(models.TextChoices):
+        LANDSCAPE = 'landscape', _('Landscape')
+        PORTRAIT = 'portrait', _('Portrait')
+        SQUARE = 'square', _('Square')
+    
+    id = models.CharField(
+        primary_key=True,
+        max_length=64,
+        editable=False
+    )
+
+    template = models.CharField(
+        max_length=64,
+        editable=False
+    )
+
+    ## Note that TakeOne Video Container objects do not require
+    ## a linkage with a user. However, since this is a profile video,
+    ## there is an inherent relationship between the two
+    takeone_user = models.OneToOneField(
+        TakeOneUser, 
+        related_name='profile_video_container',
+        on_delete=models.PROTECT
+    )
+
+    video_stream_src = models.CharField(
+        max_length=512,
+        blank=True,
+        default=''
+    )
+
+    video_stream_type = models.CharField(
+        max_length=512,
+        blank=True,
+        default=''
+    )
+
+    video_stream_video_format = models.CharField(
+        max_length=16,
+        choices=VideoFormat.choices,
+        blank=True
+    )
+
+    created_date_time = models.DateTimeField(auto_now_add=True)
+    modified_date_time = models.DateTimeField(auto_now=True)
+
+    @property
+    def video_stream(self) -> Optional[VideoStream]:
+        if self.video_stream_src and \
+            self.video_stream_type and \
+            self.video_stream_video_format:
+            return VideoStream(
+                src=self.video_stream_src,
+                type=self.video_stream_type,
+                video_format=self.video_stream_video_format
+            )
+        
+        else:
+            return None
+
+    @property
+    def should_render_video(self) -> bool:
+        return self.video_stream != None

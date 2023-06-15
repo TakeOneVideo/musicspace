@@ -1,0 +1,13 @@
+{% autoescape off %}
+Hi {{ recipient_description }},
+
+Congrats! Here's your code to start recording your TakeOne Video!
+
+{% comment %}
+In the future, this would be the full invitation deep link, not just the code
+{% endcomment %}
+{{ code }}
+
+Sincerely,
+Your friends at MusicSpace
+{% endautoescape %}

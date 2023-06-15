@@ -15,7 +15,7 @@ class MusicspaceUserForm(forms.ModelForm):
 class AddressForm(forms.ModelForm):
     
     street_1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    street_2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    street_2 = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     state = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     zip = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -58,3 +58,6 @@ class ProviderForm(forms.ModelForm):
             'genres', 'instruments',
             'in_person', 'online'
         ]
+
+class EmptyForm(forms.Form):
+    pass

@@ -1,5 +1,7 @@
 /data/
 /myenv/
+scripts/data/tmp
+scripts/myenv
 
 dev.musicspace-service.override.env
 docker-compose.override.yml
